@@ -7,6 +7,11 @@ use App\src\model\Chapter;
 class ChapterDAO extends DAO
 {
 
+    /**
+     * Returns a table containing the list of chapters
+     *
+     * @return array
+     */
     public function getChapters()
     {
         $sql = 'SELECT id, title, content, created_at, updated_at FROM chapters ORDER BY id DESC';
@@ -20,6 +25,13 @@ class ChapterDAO extends DAO
         return $chapters;
     }
 
+    /**
+     * Returns a chapter based on the ID chapter (GET)
+     *
+     * @param  int $chapterId
+     *
+     * @return string
+     */
     public function getChapter($chapterId)
     {
         $sql = 'SELECT id, title, content, created_at, updated_at FROM chapters WHERE id = ?';

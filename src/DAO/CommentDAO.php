@@ -2,16 +2,28 @@
 
 namespace App\src\DAO;
 
+use App\src\model\Comment;
+use PDO;
+
 class CommentDAO extends DAO
 {
     public function getCommentsFromChapter($chapterId)
     {
-        $sql = 'SELECT com.content, com.created_at, us.username
+        $sql = 'SELECT com.id, com.content, com.created_at, com.updated_at, us.username
                 FROM comments com
-                INNER JOIN user_chapter uc ON com.id = uc.chapter_id
-                INNER JOIN users us ON us.id = uc.user_id
-                WHERE com.chapter_id = ? 
-                ORDER BY created_at DESC';
-        return $this->createQuery($sql, [$chapterId]);
+                INNER JOIN users us ON com.id = us.id
+                WHERE com.chapter_id = ? ';
+
+        $result = $this->createQuery($sql, [$chapterId]);
+        $default = 'Aucun commentaire';
+        while ($row = $result->fetch())
+        {
+            ?><pre><?php var_dump($row);?></pre><?php
+            $comment[] = new Comment($row);
+        }
+        if(isset($comment)) { return $comment; };//test if the variable $comment is not null
+
+        $result->closeCursor();
     }
 }
+?>

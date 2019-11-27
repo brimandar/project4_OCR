@@ -1,7 +1,5 @@
 <?php
 
-use App\src\DAO\ChapterDAO;
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -15,23 +13,21 @@ use App\src\DAO\ChapterDAO;
         <h1>Mon blog</h1>
         <p>En construction</p>
         <?php
-            $donnees = new ChapterDAO();
-            $chapters = $donnees->getChapters();
 
-            while($chapter = $chapters->fetch())
+            foreach ($chapters as $chapter)
             {
                 ?>
                 <div>
                 <h2>
-                    <a href = "index.php?route=chapitre&chapterId=<?= htmlspecialchars($chapter->id); ?>"><?= htmlspecialchars($chapter->title);?></a>
+                    <a href = "index.php?route=chapitre&chapterId=<?= htmlspecialchars($chapter->getId()); ?>"><?= htmlspecialchars($chapter->getTitle());?></a>
                 </h2>
-                <p><?= nl2br(htmlspecialchars($chapter->content));?></p>
-                <p>Créé le : <?= htmlspecialchars($chapter->created_at);?></p>
+                <p><?= nl2br(htmlspecialchars($chapter->getContent()));?></p>
+                <p>Créé le : <?= htmlspecialchars($chapter->getCreated_at());?></p>
                 </div>
                 <br>
                 <?php
             }
-        $chapters->closeCursor();
+
         ?>
     </div>
 </body>

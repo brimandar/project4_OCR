@@ -2,30 +2,35 @@
 
 namespace App\config;
 /**
- * Load requets parameters of GET, POST and SESSION
- * Gère les paramètres en format objet des variables globales GET, POST et SESSION
+ * Load requets parameters of GET and POST
+ * Gère les paramètres en format objet des variables globales GET et POST
  */
 
 class Parameter
 {
-    private $parameter;
+    private $_parameter;
 
     public function __construct($parameter)
     {
-        $this->parameter = $parameter;
+        $this->_parameter = $parameter;
     }
 
     public function get($name)
     {
-        if(isset($this->parameter[$name]))
+        if(isset($this->_parameter[$name]))
         {
-            return $this->parameter[$name];
+            return $this->_parameter[$name];
         }
     }
     
     public function set($name, $value)
     {
-        $this->parameter[$name] = $value;
+        $this->_parameter[$name] = $value;
+    }
+
+    public function all()
+    {
+        return $this->_parameter;
     }
 
 }

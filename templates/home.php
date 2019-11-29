@@ -2,7 +2,8 @@
 
 <h1>Mon blog</h1>
 <p>En construction</p>
-<?= $this->_session->show('add_article'); ?>
+<?= $this->_session->show('add_chapter'); ?>
+<?= $this->_session->show('edit_chapter'); ?>
 <a href="../public/index.php?route=addChapter">Nouveau chapitre</a>
 
 <?php

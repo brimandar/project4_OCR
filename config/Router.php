@@ -15,7 +15,7 @@ class Router
 
     public function __construct()
     {
-        $this->_request = new Request();//load requests GET POST and SESSION
+        $this->_request = new Request();//load requests GET POST
         $this->_frontController = new FrontController();
         $this->_backController = new BackController();
         $this->_errorController = new ErrorController();
@@ -23,6 +23,7 @@ class Router
     public function run()
     {
         $route = $this->_request->getGet()->get('route');
+        var_dump($route);
 
         try{
             if(isset($route))
@@ -32,6 +33,9 @@ class Router
                 }
                 elseif($route === 'addChapter'){
                     $this->_backController->addChapter($this->_request->getPost());
+                }
+                elseif ($route === 'editChapter'){
+                    $this->_backController->editChapter($this->_request->getPost(), $this->_request->getGet()->get('chapterId'));
                 }
                 else{
                     $this->_errorController->errorNotFound();

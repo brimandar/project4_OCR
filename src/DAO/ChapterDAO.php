@@ -59,5 +59,15 @@ class ChapterDAO extends DAO
         $sql = 'INSERT INTO chapters (title, content, created_at) VALUES (?, ?, NOW())';
         $this->createQuery($sql, [$post->get('title'), $post->get('content') ]);
     }
+
+    public function editChapter(Parameter $post, $chapterId)
+    {
+        $sql = 'UPDATE chapters SET title=:title, content=:content WHERE id=:chapterId';
+        $this->createQuery($sql, [
+            'title' => $post->get('title'),
+            'content' => $post->get('content'),
+            'chapterId' => $chapterId
+        ]);
+    }
 }
 ?>

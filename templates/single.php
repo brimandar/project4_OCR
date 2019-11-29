@@ -10,6 +10,10 @@
 </div>
 <br>
 
+<div class="actions">
+    <a href="../public/index.php?route=editChapter&chapterId=<?= $chapter->getId(); ?>">Modifier</a>
+</div>
+
 <a href="index.php">Retour à l'accueil</a>
 <div id="comments" class="text-left" style="margin-left: 50px">
     <h3>Commentaires</h3>

@@ -2,6 +2,8 @@
 
 <h1>Mon blog</h1>
 <p>En construction</p>
+<?= $this->_session->show('add_article'); ?>
+<a href="../public/index.php?route=addChapter">Nouveau chapitre</a>
 
 <?php
 foreach ($chapters as $chapter)

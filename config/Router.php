@@ -2,28 +2,39 @@
 
 namespace App\config;
 use App\src\controller\FrontController;
+use App\src\controller\BackController;
 use App\src\controller\ErrorController;
 
 class Router
 {
 
     private $_frontController;
+    private $_backController;
+    private $_errorController;
+    private $_request;
 
     public function __construct()
     {
+        $this->_request = new Request();//load requests GET POST and SESSION
         $this->_frontController = new FrontController();
+        $this->_backController = new BackController();
         $this->_errorController = new ErrorController();
     }
     public function run()
     {
+        $route = $this->_request->getGet()->get('route');
+
         try{
-            if(isset($_GET['route']))
+            if(isset($route))
             {
-                if($_GET['route'] === 'chapitre'){
-                    $this->_frontController->chapter($_GET['chapterId']);
+                if($route === 'chapitre'){
+                    $this->_frontController->chapter($this->_request->getGet()->get('chapterId'));
+                }
+                elseif($route === 'addChapter'){
+                    $this->_backController->addChapter($this->_request->getPost());
                 }
                 else{
-                    echo 'page inconnue';
+                    $this->_errorController->errorNotFound();
                 }
             }
             else{

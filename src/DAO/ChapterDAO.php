@@ -3,6 +3,7 @@
 namespace App\src\DAO;
 
 use App\src\model\Chapter;
+use App\config\Parameter;
 
 class ChapterDAO extends DAO
 {
@@ -40,6 +41,23 @@ class ChapterDAO extends DAO
         $chapter = new Chapter($data);
         $return->closeCursor();
         return $chapter;
+    }
+
+    /**
+     * add chapter in DB chapters
+     *
+     * @param  object data class Parameter
+     *
+     * @return void
+     */
+    public function addChapter(Parameter $post)
+    {
+        /*
+        * Permet de récupérer les variables $title, $content et $author de la class Parameter 
+        * utilisée dans BackController
+        */
+        $sql = 'INSERT INTO chapters (title, content, created_at) VALUES (?, ?, NOW())';
+        $this->createQuery($sql, [$post->get('title'), $post->get('content') ]);
     }
 }
 ?>

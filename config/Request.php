@@ -18,8 +18,11 @@ class Request
         $this->_session = new Session($_SESSION);
     }
 
+
     /**
-     * @return Parameter
+     * get super variable $_GET
+     *
+     * @return string
      */
     public function getGet()
     {
@@ -27,7 +30,9 @@ class Request
     }
 
     /**
-     * @return mixed
+     * get super variable $_POST
+     * 
+     * @return string
      */
     public function getPost()
     {
@@ -35,7 +40,9 @@ class Request
     }
 
     /**
-     * @return mixed
+     * get super variable $_SESSION
+     * 
+     * @return string
      */
     public function getSession()
     {

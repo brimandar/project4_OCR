@@ -7,7 +7,6 @@ use App\config\Parameter;
 
 class ChapterDAO extends DAO
 {
-
     /**
      * Returns a table containing the list of chapters
      *
@@ -26,6 +25,7 @@ class ChapterDAO extends DAO
         return $chapters;
     }
 
+
     /**
      * Returns a chapter based on the ID chapter (GET)
      *
@@ -42,6 +42,7 @@ class ChapterDAO extends DAO
         $return->closeCursor();
         return $chapter;
     }
+
 
     /**
      * add chapter in DB chapters
@@ -60,6 +61,7 @@ class ChapterDAO extends DAO
         $this->createQuery($sql, [$post->get('title'), $post->get('content') ]);
     }
 
+
     public function editChapter(Parameter $post, $chapterId)
     {
         $sql = 'UPDATE chapters SET title=:title, content=:content WHERE id=:chapterId';
@@ -68,6 +70,23 @@ class ChapterDAO extends DAO
             'content' => $post->get('content'),
             'chapterId' => $chapterId
         ]);
+    }
+
+
+    /**
+     * delete Article
+     *
+     * @param  mixed $articleId
+     *
+     * @return void
+     */
+    public function deleteArticle($chapterId)
+    {
+        $sql = 'DELETE FROM comments WHERE chapter_id = ?';
+        $this->createQuery($sql, [$chapterId]);
+        $sql = 'DELETE FROM chapters WHERE id = ?';
+        $this->createQuery($sql, [$chapterId]);
+
     }
 }
 ?>

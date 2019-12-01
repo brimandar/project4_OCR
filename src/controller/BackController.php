@@ -11,7 +11,7 @@ class BackController extends Controller
      *
      * @param  mixed data forms
      *
-     * @return mixed
+     * @return object
      */
     public function addChapter(Parameter $post)
     {
@@ -35,13 +35,14 @@ class BackController extends Controller
         return $this->_view->render('add_chapter');
     }
 
+
     /**
      * Edit chapter (administrator only)
      *
      * @param  mixed $post
      * @param  mixed $chapterId
      *
-     * @return void
+     * @return object
      */
     public function editChapter(Parameter $post, $chapterId)
     {
@@ -68,6 +69,22 @@ class BackController extends Controller
         return $this->_view->render('edit_chapter', [
             'chapter' => $chapter
         ]);
-
     }
+
+
+    /**
+     * delete Chapter (administrator only)
+     *
+     * @param  mixed $chapterId
+     *
+     * @return object
+     */
+    public function deleteChapter($chapterId)
+    {
+        $this->_chapterDAO->deleteArticle($chapterId);
+        $this->_session->set('delete_chapter', 'Le chapitre a bien été supprimé');
+        header('Location: ../public/index.php');
+    }
+
+
 }

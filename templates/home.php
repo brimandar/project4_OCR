@@ -4,6 +4,8 @@
 <p>En construction</p>
 <?= $this->_session->show('add_chapter'); ?>
 <?= $this->_session->show('edit_chapter'); ?>
+<?= $this->_session->show('delete_chapter'); ?>
+<?= $this->_session->show('add_comment'); ?>
 <a href="../public/index.php?route=addChapter">Nouveau chapitre</a>
 
 <?php

@@ -2,10 +2,15 @@
 
 <h1>Mon blog</h1>
 <p>En construction</p>
+
+<!-- confirmation message -->
 <?= $this->_session->show('add_chapter'); ?>
 <?= $this->_session->show('edit_chapter'); ?>
 <?= $this->_session->show('delete_chapter'); ?>
 <?= $this->_session->show('add_comment'); ?>
+<?= $this->_session->show('flag_comment'); ?>
+<?= $this->_session->show('delete_comment'); ?>
+
 <a href="../public/index.php?route=addChapter">Nouveau chapitre</a>
 
 <?php

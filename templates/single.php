@@ -32,6 +32,15 @@
             <h4><?= htmlspecialchars($comment->getUsername());?></h4>
             <p><?= htmlspecialchars($comment->getContent());?></p>
             <p>Posté le <?= htmlspecialchars($comment->getCreated_at());?></p>
+
+            <?php
+            if($comment->isFlag()) {
+                ?> <p>Ce commentaire a déjà été signalé</p> <?php
+            } else {
+                ?> <p><a href="../public/index.php?route=flagComment&commentId=<?= $comment->getId(); ?>">Signaler le commentaire</a></p> <?php
+            }
+            ?>
+            <p><a href="../public/index.php?route=deleteComment&commentId=<?= $comment->getId(); ?>">Supprimer le commentaire</a></p>
     <?php
         }
     }

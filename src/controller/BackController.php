@@ -87,4 +87,19 @@ class BackController extends Controller
     }
 
 
+    /**
+     * Delete a comment (administrator only)
+     *
+     * @param  mixed $commentId
+     *
+     * @return void
+     */
+    public function deleteComment($commentId)
+    {
+        $this->_commentDAO->deleteComment($commentId);
+        $this->_session->set('delete_comment', 'Le commentaire a bien été supprimé');
+        header('Location: ../public/index.php');
+    }
+
+
 }

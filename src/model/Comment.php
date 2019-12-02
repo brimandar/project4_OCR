@@ -10,6 +10,8 @@ class Comment
     private $_username;
     private $_created_at;
     private $_updated_at;
+    private $_flag;
+
 
     public function __construct(array $donnees)
     {
@@ -63,6 +65,11 @@ class Comment
         $this->_updated_at = $updated_at;
     }
 
+    public function setFlag($flag)
+    {
+        $this->_flag = $flag;
+    }
+
     //getters
     public function getId() { return $this->_id; }
     public function getChapter_id() { return $this->_chapter_id; }
@@ -70,5 +77,6 @@ class Comment
     public function getContent() { return $this->_content; }
     public function getCreated_at() { return $this->_created_at; }
     public function getUpdated_at() { return $this->_updated_at; }
+    public function isFlag() { return $this->_flag; }
 
 }

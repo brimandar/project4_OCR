@@ -32,7 +32,6 @@ class CommentDAO extends DAO
         $result->closeCursor();
     }
 
-
     /**
      * add a comment to an chapter
      *
@@ -41,12 +40,11 @@ class CommentDAO extends DAO
      *
      * @return void
      */
-    public function addComment(Parameter $post, $chapterId)
+    public function addComment(Parameter $post, $chapterId, $user_id)
     {
         $sql = 'INSERT INTO comments (user_id, content, created_at, chapter_id, flag) VALUES (?, ?, NOW(), ?, 0)';
-        $this->createQuery($sql, [2, $post->get('content'), $chapterId]);
+        $this->createQuery($sql, [$user_id, $post->get('content'), $chapterId]);
     }
-
 
     /**
      * Report an inappropriate comment
@@ -61,6 +59,18 @@ class CommentDAO extends DAO
         $this->createQuery($sql, [1, $commentId]);
     }
 
+    /**
+     * an administrator can remove the flag
+     *
+     * @param  mixed $commentId
+     *
+     * @return void
+     */
+    public function unflagComment($commentId)
+    {
+        $sql = 'UPDATE comments SET flag = ? WHERE id = ?';
+        $this->createQuery($sql, [0, $commentId]);
+    }
 
     /**
      * deleteComment
@@ -73,6 +83,28 @@ class CommentDAO extends DAO
     {
         $sql = 'DELETE FROM comments WHERE id = ?';
         $this->createQuery($sql, [$commentId]);
+    }
+
+
+    /**
+     * get Flag Comments (for admin view)
+     *
+     * @return object
+     */
+    public function getFlagComments()
+    {
+        $sql = 'SELECT comments.id, comments.user_id, users.username, comments.content, comments.created_at, comments.flag 
+                FROM comments
+                INNER JOIN users ON comments.user_id = users.id 
+                WHERE flag = ? ORDER BY created_at DESC';
+        $result = $this->createQuery($sql, [1]);
+        $comments = [];
+        foreach ($result as $row) {
+            $commentId = $row['id'];
+            $comments[$commentId] = new Comment($row);
+        }
+        $result->closeCursor();
+        return $comments;
     }
     
 }

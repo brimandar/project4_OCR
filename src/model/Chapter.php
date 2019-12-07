@@ -9,6 +9,7 @@ class Chapter
     private $_content;
     private $_created_at;
     private $_updated_at;
+    private $_username;
 
     public function __construct(array $donnees)
     {
@@ -57,6 +58,11 @@ class Chapter
         $this->_updated_at = $updated_at;
     }
 
+    public function setUsername($author)
+    {
+        $this->_author = $author;
+    }
+
     //getters
     public function getId()
     {
@@ -80,6 +86,11 @@ class Chapter
     public function getUpdated_at()
     {
         return $this->_updated_at;
+    }
+
+    public function getUsername()
+    {
+        return $this->_author;
     }
 
 }

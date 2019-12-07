@@ -1,10 +1,9 @@
 <?php
 
 namespace App\src\constraint;
-
 use App\config\Parameter;
 
-class CommentValidation extends Validation
+class UserValidation extends Validation
 {
     private $_errors = [];
     private $_constraint;
@@ -17,9 +16,9 @@ class CommentValidation extends Validation
     /**
      * check all field of form
      *
-     * @param  object $post
+     * @param  array $post
      *
-     * @return void
+     * @return array
      */
     public function check(Parameter $post)
     {
@@ -39,12 +38,12 @@ class CommentValidation extends Validation
      */
     private function checkField($name, $value)
     {
-        if($name === 'pseudo') {
+        if($name === 'username') {
             $error = $this->checkPseudo($name, $value);
             $this->addError($name, $error);
         }
-        elseif ($name === 'content') {
-            $error = $this->checkContent($name, $value);
+        elseif ($name === 'password') {
+            $error = $this->checkPassword($name, $value);
             $this->addError($name, $error);
         }
     }
@@ -52,10 +51,10 @@ class CommentValidation extends Validation
     /**
      * add Error to the var _error
      *
-     * @param  string $name
+     * @param  mixed $name
      * @param  mixed $error
      *
-     * @return array
+     * @return void
      */
     private function addError($name, $error) {
         if($error) {
@@ -71,18 +70,18 @@ class CommentValidation extends Validation
      * @param  string $name
      * @param  mixed $value
      *
-     * @return object
+     * @return void
      */
     private function checkPseudo($name, $value)
     {
         if($this->_constraint->notBlank($name, $value)) {
-            return $this->_constraint->notBlank('pseudo', $value);
+            return $this->_constraint->notBlank('username', $value);
         }
         if($this->_constraint->minLength($name, $value, 2)) {
-            return $this->_constraint->minLength('pseudo', $value, 2);
+            return $this->_constraint->minLength('username', $value, 2);
         }
         if($this->_constraint->maxLength($name, $value, 255)) {
-            return $this->_constraint->maxLength('pseudo', $value, 255);
+            return $this->_constraint->maxLength('username', $value, 255);
         }
     }
 
@@ -94,13 +93,16 @@ class CommentValidation extends Validation
      *
      * @return void
      */
-    private function checkContent($name, $value)
+    private function checkPassword($name, $value)
     {
         if($this->_constraint->notBlank($name, $value)) {
-            return $this->_constraint->notBlank('contenu', $value);
+            return $this->_constraint->notBlank('password', $value);
         }
         if($this->_constraint->minLength($name, $value, 2)) {
-            return $this->_constraint->minLength('contenu', $value, 2);
+            return $this->_constraint->minLength('password', $value, 2);
+        }
+        if($this->_constraint->maxLength($name, $value, 255)) {
+            return $this->_constraint->maxLength('password', $value, 255);
         }
     }
 }

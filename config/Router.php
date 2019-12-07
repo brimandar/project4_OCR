@@ -23,6 +23,7 @@ class Router
     public function run()
     {
         $route = $this->_request->getGet()->get('route');
+        $user_id = $this->_request->getSession('username')->get('id');
         var_dump($route);
 
         try{
@@ -35,19 +36,46 @@ class Router
                     $this->_backController->addChapter($this->_request->getPost());
                 }
                 elseif ($route === 'editChapter'){
-                    $this->_backController->editChapter($this->_request->getPost(), $this->_request->getGet()->get('chapterId'));
+                    $this->_backController->editChapter($this->_request->getPost(), $this->_request->getGet()->get('chapterId'), $user_id );
                 }
                 elseif ($route === 'deleteChapter'){
                     $this->_backController->deleteChapter($this->_request->getGet()->get('chapterId'));
                 }
                 elseif ($route === 'addComment'){
-                    $this->_frontController->addComment($this->_request->getPost(), $this->_request->getGet()->get('chapterId'));
+                    $this->_frontController->addComment($this->_request->getPost(), $this->_request->getGet()->get('chapterId'), $user_id);
                 }
                 elseif($route === 'flagComment'){
                     $this->_frontController->flagComment($this->_request->getGet()->get('commentId'));
                 }
+                elseif($route === 'unflagComment'){
+                    $this->_backController->unflagComment($this->_request->getGet()->get('commentId'));
+                }
                 elseif($route === 'deleteComment'){
                     $this->_backController->deleteComment($this->_request->getGet()->get('commentId'));
+                }
+                elseif($route === 'register'){
+                    $this->_frontController->register($this->_request->getPost());
+                }
+                elseif($route === 'login'){
+                    $this->_frontController->login($this->_request->getPost());
+                }
+                elseif($route === 'profile'){
+                    $this->_backController->profile();
+                }
+                elseif($route === 'updatePassword'){
+                    $this->_backController->updatePassword($this->_request->getPost());
+                }
+                elseif($route === 'logout'){
+                    $this->_backController->logout();
+                }
+                elseif($route === 'deleteAccount'){
+                    $this->_backController->deleteAccount();
+                }
+                elseif($route === 'deleteUser'){
+                    $this->_backController->deleteUser($this->_request->getGet()->get('userId'));
+                }
+                elseif($route === 'administration'){
+                    $this->_backController->administration();
                 }
                 else{
                     $this->_errorController->errorNotFound();

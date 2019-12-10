@@ -24,7 +24,6 @@ class Router
     {
         $route = $this->_request->getGet()->get('route');
         $user_id = $this->_request->getSession('username')->get('id');
-        var_dump($route);
 
         try{
             if(isset($route))

@@ -7,7 +7,6 @@ use App\config\Request;
 class View
 {
     private $_file;
-    private $_title;
     private $_request;
     private $_session;
 
@@ -25,12 +24,12 @@ class View
      *
      * @return page
      */
-    public function render($template, $data = [])
+    public function render($template, $data = [], $title)
     {
         $this->_file = '../templates/'.$template.'.php';
         $content  = $this->renderFile($this->_file, $data);
         $view = $this->renderFile('../templates/base.php', [
-            'title' => $this->_title,
+            'title' => $title,
             'content' => $content,
             'session' => $this->_session
         ]);

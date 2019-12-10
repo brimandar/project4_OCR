@@ -26,8 +26,8 @@ class ChapterDAO extends DAO
         }
         $result->closeCursor();
         return $chapters;
+ 
     }
-
 
     /**
      * Returns a chapter based on the ID chapter (GET)

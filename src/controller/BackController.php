@@ -57,7 +57,7 @@ class BackController extends Controller
                 'chapters' => $chapters,
                 'comments' => $comments,
                 'users' => $users
-            ]);
+            ], 'Administration');
         }
     }
     
@@ -86,9 +86,9 @@ class BackController extends Controller
                 return $this->_view->render('add_chapter', [
                     'post' => $post,
                     'errors' => $errors
-                ]);
+                ],'Ajouter un chapitre');
             }
-            return $this->_view->render('add_chapter');
+            return $this->_view->render('add_chapter',[],'Ajouter un chapitre');
         }
     }
 
@@ -108,7 +108,7 @@ class BackController extends Controller
 
             if($post->get('submit')) 
             {
-                $errors = $this->_validation->validate($post, 'chapter', $this->_session->get('id'));
+                $errors = $this->_validation->validate($post, 'chapter');
 
                 if(!$errors) 
                 {
@@ -120,13 +120,13 @@ class BackController extends Controller
                 return $this->_view->render('edit_chapter', [
                     'post' => $post,
                     'errors' => $errors
-                ]);
+                ], 'Editer un chapitre');
 
             }
 
             return $this->_view->render('edit_chapter', [
                 'chapter' => $chapter
-            ]);
+            ], 'Editer un chapitre');
         }
     }
 
@@ -156,11 +156,11 @@ class BackController extends Controller
      */
     public function deleteComment($commentId)
     {
-        if($this->checkAdmin()) 
+        if($this->checkLoggedIn()) 
         {
             $this->_commentDAO->deleteComment($commentId);
             $this->_session->set('delete_comment', 'Le commentaire a bien été supprimé');
-            header('Location: ../public/index.php?route=administration');
+            header('Location: ../public/index.php');
         }
     }
 
@@ -190,7 +190,7 @@ class BackController extends Controller
     {
         if($this->checkLoggedIn()) 
         {
-            return $this->_view->render('profile');
+            return $this->_view->render('profile',[],"Mon compte");
         }
     }
 
@@ -210,7 +210,7 @@ class BackController extends Controller
                 $this->_session->set('update_password', 'Le mot de passe a été mis à jour');
                 header('Location: ../public/index.php?route=profile');
             }
-            return $this->_view->render('update_password');
+            return $this->_view->render('update_password',[],'Modifier mon mot de passe');
         }
     }
 

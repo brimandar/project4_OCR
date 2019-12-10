@@ -14,7 +14,7 @@ class FrontController extends Controller
     public function home()
     {
         $chapters = $this->_chapterDAO->getChapters();
-        return $this->_view->render('home', ['chapters' => $chapters] );//Generate view with dynamics datas
+        return $this->_view->render('home', ['chapters' => $chapters], "Accueil" );//Generate view with dynamics datas
     }
 
     /**
@@ -30,8 +30,8 @@ class FrontController extends Controller
         $comments = $this->_commentDAO->getCommentsFromChapter($chapterId);
         return $this->_view->render('single', [
             'chapter' => $chapter,
-            'comments' => $comments
-            ]);
+            'comments' => $comments,
+        ], 'Chapitre');
             // Return variables chapter et comments to the page
     }
 
@@ -62,7 +62,7 @@ class FrontController extends Controller
                 'comments' => $comments,
                 'post' => $post,
                 'errors' => $errors
-            ]);
+            ], '');
     }
 
 
@@ -108,11 +108,11 @@ class FrontController extends Controller
             return $this->_view->render('register', [
                 'post' => $post,
                 'errors' => $errors
-            ]);
+            ], 'Inscription');
 
         }
         // If form not completed, Go to the register view
-        return $this->_view->render('register');
+        return $this->_view->render('register', [], 'Inscription');
     }
 
 
@@ -141,10 +141,10 @@ class FrontController extends Controller
                 $this->_session->set('error_login', 'Le pseudo ou le mot de passe sont incorrects');
                 return $this->_view->render('login', [
                     'post'=> $post
-                ]);
+                ], "Connection");
             }
         }
-        return $this->_view->render('login');
+        return $this->_view->render('login',[],"Connection");
     }
 
 }

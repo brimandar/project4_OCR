@@ -1,4 +1,4 @@
-<?php $this->title = 'Mon profil'; ?>
+<?php $title; ?>
 
 <h1>Mon blog</h1>
 <p>En construction</p>

@@ -6,10 +6,10 @@
 </head>
 
 
-<div id="test">
-    <h1 class="h1">Ajouter un nouveau chapitre</h1>
+<div>
+    <h1 class="h1">Ajouter une newsletter</h1>
 </div>
 
     <div>
-        <?php include('form_chapter.php');?>
+        <?php include('form_news.php');?>
     </div>

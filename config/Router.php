@@ -31,6 +31,9 @@ class Router
                 if($route === 'chapitre'){
                     $this->_frontController->chapter($this->_request->getGet()->get('chapterId'));
                 }
+                elseif($route === 'allChapters'){
+                    $this->_frontController->allChapters();
+                }
                 elseif($route === 'addChapter'){
                     $this->_backController->addChapter($this->_request->getPost());
                 }
@@ -51,6 +54,15 @@ class Router
                 }
                 elseif($route === 'deleteComment'){
                     $this->_backController->deleteComment($this->_request->getGet()->get('commentId'));
+                }
+                elseif($route === 'addNews'){
+                    $this->_backController->addNews($this->_request->getPost());
+                }
+                elseif ($route === 'editNews'){
+                    $this->_backController->editNew($this->_request->getPost(), $this->_request->getGet()->get('newsId'));
+                }
+                elseif($route === 'deleteNews'){
+                    $this->_backController->deleteNew($this->_request->getGet()->get('newsId'));
                 }
                 elseif($route === 'register'){
                     $this->_frontController->register($this->_request->getPost());

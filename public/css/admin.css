@@ -1,0 +1,8 @@
+#modulesAdmin{
+    position: relative;
+}
+
+#comment_admin, #users_admin, #news_admin{
+    display: none;
+    position: absolute;
+}

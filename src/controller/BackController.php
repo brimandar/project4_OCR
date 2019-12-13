@@ -52,11 +52,13 @@ class BackController extends Controller
             $chapters = $this->_chapterDAO->getChapters();
             $comments = $this->_commentDAO->getFlagComments();
             $users = $this->_userDAO->getUsers();
+            $news = $this->_newsletterDAO->getNews();
             
             return $this->_view->render('administration', [
                 'chapters' => $chapters,
                 'comments' => $comments,
-                'users' => $users
+                'users' => $users,
+                'news' => $news
             ], 'Administration');
         }
     }
@@ -273,6 +275,87 @@ class BackController extends Controller
         {
             $this->_userDAO->deleteUser($userId);
             $this->_session->set('delete_user', 'L\'utilisateur a bien été supprimé');
+            header('Location: ../public/index.php?route=administration');
+        }
+    }
+
+    /**
+     * addNews
+     *
+     * @param  array $post
+     *
+     * @return void
+     */
+    public function addNews(Parameter $post)
+    {
+        if($this->checkAdmin()) 
+        {
+            if ($post->get('submit')) 
+            {
+                $errors = $this->_validation->validate($post, 'news');
+
+                if(!$errors) 
+                {
+                    $this->_newsletterDAO->addNew($post, $this->_session->get('id'));
+                    $this->_session->set('add_news', 'La newsletter a bien été ajoutée');
+                    header('Location: ../public/index.php?route=administration');
+                }
+
+                return $this->_view->render('add_news', [
+                    'post' => $post,
+                    'errors' => $errors
+                ],'Ajouter une newsletter');
+            }
+            return $this->_view->render('add_news',[],'Ajouter une newsletter');
+        }
+    }
+
+    /**
+     * editNew
+     *
+     * @param  array $post
+     * @param  int $newsId
+     *
+     * @return void
+     */
+    public function editNew(Parameter $post, $newsId)
+    {
+        if($this->checkAdmin()) 
+        {
+            $news = $this->_newsletterDAO->getNew($newsId);
+            if($post->get('submit')) 
+            {
+                $errors = $this->_validation->validate($post, 'news');
+                if(!$errors) 
+                {
+                $this->_newsletterDAO->editNew($post, $newsId);
+                $this->_session->set('edit_news', 'Le chapitre a bien été modifié');
+                header('Location: ../public/index.php?route=administration');
+                }
+                return $this->_view->render('edit_news', [
+                    'post' => $post,
+                    'errors' => $errors
+                ], 'Editer une newsletter');
+            }
+            return $this->_view->render('edit_news', [
+                'news' => $news
+            ], 'Editer une newsletter');
+        }
+    }
+
+    /**
+     * deleteChapter
+     *
+     * @param  int $chapterId
+     *
+     * @return void
+     */
+    public function deleteNew($newsId)
+    {
+        if($this->checkAdmin()) 
+        {
+            $this->_newsletterDAO->deleteNew($newsId);
+            $this->_session->set('delete_news', 'La newsletter a bien été supprimée');
             header('Location: ../public/index.php?route=administration');
         }
     }

@@ -20,6 +20,10 @@ class Validation
             $userValidation = new UserValidation();
             $errors = $userValidation->check($data);
             return $errors;
+        } elseif ($name === 'news') {
+            $newsValidation = new NewsValidation();
+            $errors = $newsValidation->check($data);
+            return $errors;
         }
     }
 }

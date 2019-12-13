@@ -11,12 +11,13 @@
     $config = HTMLPurifier_Config::createDefault();
     $purifier = new HTMLPurifier($config);
 ?>
+    
 
     <?php
-    $route = isset($chapter) && $chapter->getId() ? 'editChapter&chapterId='.$chapter->getId() : 'addChapter';
-    $submit = $route === 'addChapter' ? 'Envoyer' : 'Mettre à jour';
-    $title = isset($chapter) && $chapter->getTitle() ? htmlspecialchars($chapter->getTitle()) : '';
-    $content = isset($chapter) && $chapter->getContent() ? $purifier->purify($chapter->getContent()) : '';
+    $route = isset($news) && $news->getId() ? 'editNews&newsId='.$news->getId() : 'addNews';
+    $submit = $route === 'addNews' ? 'Envoyer' : 'Mettre à jour';
+    $title = isset($news) && $news->getTitle() ? htmlspecialchars($news->getTitle()) : '';
+    $content = isset($news) && $news->getContent() ? $purifier->purify($news->getContent()) : '';
     $admin = $this->_request->getSession('username')->get('id');
     ?>
 

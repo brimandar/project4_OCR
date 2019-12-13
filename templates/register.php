@@ -8,12 +8,20 @@
         <div class="form-group">
             <label for="username">Pseudo</label><br>
             <input class="form-control" type="text" id="username" name="username" value="<?= isset($post) ? htmlspecialchars($post->get('username')): ''; ?>"><br>
-            <?= isset($errors['username']) ? $errors['username'] : ''; ?>
+            <?php if( isset($errors['username']) ) : ?>
+                <div class="alert alert-danger" role="alert">
+                    <?= $errors['username'] ?>
+                </div>
+            <?php endif ?>
         </div>
         <div class="form-group">
             <label for="password">Mot de passe</label>
             <input class="form-control" type="password" id="password" name="password"><br>
-            <?= isset($errors['password']) ? $errors['password'] : ''; ?>
+            <?php if( isset($errors['password']) ) : ?>
+                <div class="alert alert-danger" role="alert">
+                    <?= $errors['password'] ?>
+                </div>
+            <?php endif ?>
         </div>
         <div class="form-group">
             <label for="email">Email</label>

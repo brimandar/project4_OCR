@@ -6,6 +6,7 @@ use App\config\Request;
 use App\src\DAO\ChapterDAO;
 use App\src\DAO\CommentDAO;
 use App\src\DAO\UserDAO;
+use App\src\DAO\NewsletterDAO;
 use App\src\model\View;
 use App\src\constraint\Validation;
 
@@ -15,6 +16,7 @@ abstract class Controller
     protected $_chapterDAO;
     protected $_commentDAO;
     protected $_userDAO;
+    protected $_newsletterDAO;
     protected $_view;
     protected $_get;
     protected $_post;
@@ -26,6 +28,7 @@ abstract class Controller
         $this->_chapterDAO = new ChapterDAO();
         $this->_commentDAO = new CommentDAO();
         $this->_userDAO = new UserDAO();
+        $this->_newsletterDAO = new NewsletterDAO();
         $this->_view = new View();
         $this->_request = new Request();
         $this->_validation = new Validation();

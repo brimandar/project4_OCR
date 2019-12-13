@@ -7,17 +7,17 @@
     <meta name="description" content="Blog de l'écrivain Jean Forteroche">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <title><?= $title ?></title>
-
+    <!-- CSS -->
+    <link href="../public/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link href="../public/css/bootstrap.css" rel="stylesheet">
     <!-- Favicons -->
     <link rel="icon" href="../public/img/favicon.png">
     <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
     <meta name="theme-color" content="#563d7c">
-    
-    <!-- Custom styles for this template -->
-    <link href="../public/css/bootstrap.css" rel="stylesheet">
-  </head>
+    <!-- JQuery-confirm -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+</head>
 
 <body>
 
@@ -56,7 +56,7 @@
     <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
         <a class="p-2 text-muted" href="index.php">Accueil</a>
-        <a class="p-2 text-muted" href="#">Le roman</a>
+        <a class="p-2 text-muted" href="../public/index.php?route=allChapters">Le roman</a>
         <a class="p-2 text-muted" href="#">Biographie</a>
         <a class="p-2 text-muted" href="#">Me contacter</a>
         </nav>
@@ -71,4 +71,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="../public/js/admin.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 </html>

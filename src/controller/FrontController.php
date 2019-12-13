@@ -7,14 +7,29 @@ use App\config\Parameter;
 class FrontController extends Controller
 {
     /**
-     * Returns the home page with the list of the chapters
+     * Returns the chapters page with the list of the chapters
      *
      * @return object
      */
-    public function home()
+    public function allChapters()
     {
         $chapters = $this->_chapterDAO->getChapters();
-        return $this->_view->render('home', ['chapters' => $chapters], "Accueil" );//Generate view with dynamics datas
+        return $this->_view->render('allChapters', ['chapters' => $chapters], "Les chapitres" );//Generate view with dynamics datas
+    }
+
+    /**
+     * The last chapter for home page
+     *
+     * @return void
+     */
+    public function home()
+    {
+        $chapter = $this->_chapterDAO->lastChapter();
+        $news = $this->_newsletterDAO->getNews();
+        return $this->_view->render('home', [
+            'chapter' => $chapter,
+            'news' => $news
+        ], "Accueil" );//Generate view with dynamics datas
     }
 
     /**
@@ -98,13 +113,11 @@ class FrontController extends Controller
             if($this->_userDAO->checkUser($post)) {
                 $errors['username'] = $this->_userDAO->checkUser($post);
             }
-            //  If errors is TRUE
             if(!$errors) {
                 $this->_userDAO->register($post);
                 $this->_session->set('register', 'Votre inscription a bien été effectuée');
                 header('Location: ../public/index.php');
             }
-            //  Else, return the page
             return $this->_view->render('register', [
                 'post' => $post,
                 'errors' => $errors

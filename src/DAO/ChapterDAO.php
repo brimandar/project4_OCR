@@ -1,7 +1,6 @@
 <?php
 
 namespace App\src\DAO;
-
 use App\src\model\Chapter;
 use App\config\Parameter;
 
@@ -43,6 +42,20 @@ class ChapterDAO extends DAO
                 INNER JOIN users ON chapters.user_id = users.id
                 WHERE chapters.id = ?';
         $return = $this->createQuery($sql, [$chapterId]);
+        $data = $return->fetch();
+        $chapter = new Chapter($data);
+        $return->closeCursor();
+        return $chapter;
+    }
+
+    public function lastChapter()
+    {
+        $sql = 'SELECT *  
+                FROM chapters
+                ORDER BY id DESC
+                LIMIT 1';
+
+        $return = $this->createQuery($sql);
         $data = $return->fetch();
         $chapter = new Chapter($data);
         $return->closeCursor();

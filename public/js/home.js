@@ -6,7 +6,7 @@ function afficherMessageConfirmation()
   });
   $(".messageConfirmation").css({
       marginBottom: '15px'
-  })
+  });
 
     setTimeout(function() 
     { 

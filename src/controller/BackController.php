@@ -50,6 +50,7 @@ class BackController extends Controller
         if($this->checkAdmin()) 
         {
             $chapters = $this->_chapterDAO->getChapters();
+            $nb_pages = $this->_chapterDAO->getNbPages();
             $comments = $this->_commentDAO->getFlagComments();
             $users = $this->_userDAO->getUsers();
             $news = $this->_newsletterDAO->getNews();
@@ -59,7 +60,7 @@ class BackController extends Controller
                 'comments' => $comments,
                 'users' => $users,
                 'news' => $news
-            ], 'Administration');
+            ], 'Administration', $nb_pages);
         }
     }
     

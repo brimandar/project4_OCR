@@ -5,7 +5,7 @@
 </head>
 <!-- security TinyMCE HTML Purifier -->
 <?php
-    require_once '../vendor/ezyang/htmlpurifier/library/HTMLPurifier.auto.php';
+    // require_once '../vendor/ezyang/htmlpurifier/library/HTMLPurifier.auto.php';
     $config = HTMLPurifier_Config::createDefault();
     $purifier = new HTMLPurifier($config);
 ?>

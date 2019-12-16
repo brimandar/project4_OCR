@@ -24,13 +24,13 @@
         <div id="chapter_admin">
             <h2>Le roman</h2>
             <a class="btn btn-primary btn-lg mb-2" href="../public/index.php?route=addChapter">Nouveau chapitre</a>
-            <table class="table table-bordered table-striped">
+            <table id="table_chapters_admin" class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <td scope="col">Titre</td>
-                        <td scope="col">Contenu</td>
-                        <td scope="col">Auteur</td>
-                        <td scope="col">Date</td>
+                        <td class="pointable" scope="col" onclick="sortTable(0)">Titre</td>
+                        <td class="pointable" scope="col" onclick="sortTable(1)">Contenu</td>
+                        <td class="pointable" scope="col" onclick="sortTable(2)">Auteur</td>
+                        <td class="pointable" scope="col" onclick="sortTable(3)">Date</td>
                         <td scope="col">Actions</td>
                     </tr>
                 </thead>
@@ -45,14 +45,16 @@
                             <td>Créé le : <?= htmlspecialchars($chapter->getCreated_at());?></td>
                             <td>
                                 <a href="../public/index.php?route=editChapter&chapterId=<?= $chapter->getId(); ?>">Modifier</a>
-                                <a  href="../public/index.php?route=deleteChapter&chapterId=<?= $chapter->getId(); ?>">Supprimer</a>
-                                <button class="commandSupprChapter">Test</button>
+                                <a class="commandSupprChapter" href="../public/index.php?route=deleteChapter&chapterId=<?= $chapter->getId(); ?>">Supprimer</a>
                             </td>
                         </tr>
                         <?php
                     } ?>
                 </tbody>
             </table>
+            <?php for ($i=1; $i<=$nb_pages; $i++) : ?>
+            <a href="../public/index.php?route=administration&page=<?= $i;?> "> <?= $i; ?> </a>
+            <?php endfor; ?>
         </div>
 <!-- Comments admin -->
         <div id="comment_admin">

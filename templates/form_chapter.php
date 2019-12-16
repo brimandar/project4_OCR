@@ -2,12 +2,23 @@
     <script src="https://cdn.tiny.cloud/1/irmbudytgj8u8svw00m9xt5gq7tqa8m85x1w1a0j6owdpjdm/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         tinymce.init({
-                selector: 'textarea#contentText'
-            });
+                selector: 'textarea#contentText',
+                language_url : '../config/languages/fr_FR.js',
+                language: 'fr_FR',
+                menubar: false,
+                plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code emoticons wordcount'
+                ],
+                toolbar: 'undo redo | formatselect | ' +
+                ' bold italic forecolor backcolor | alignleft aligncenter ' +
+                ' alignright alignjustify | bullist numlist outdent indent |' +
+                ' removeformat | emoticons',
+                });
     </script>
 <!-- security TinyMCE HTML Purifier -->
 <?php
-    require_once '../vendor/ezyang/htmlpurifier/library/HTMLPurifier.auto.php';
     $config = HTMLPurifier_Config::createDefault();
     $purifier = new HTMLPurifier($config);
 ?>

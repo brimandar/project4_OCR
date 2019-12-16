@@ -3,9 +3,13 @@
 namespace App\src\DAO;
 use App\src\model\Chapter;
 use App\config\Parameter;
+use App\src\DAO\Pagination;
 
 class ChapterDAO extends DAO
 {
+    private $_start;
+    private $_limit;
+    private $_total;
     /**
      * Returns a table containing the list of chapters
      *
@@ -13,10 +17,20 @@ class ChapterDAO extends DAO
      */
     public function getChapters()
     {
-        $sql = 'SELECT chapters.id, chapters.title, chapters.content, users.username, chapters.created_at, chapters.updated_at 
+        //Pagination
+        $this->_limit = 5;//max chapters per page
+        $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $this->_start = 0;//offset limit
+        if($current_page > 1){
+            $this->_start = ($current_page * $this->_limit) - $this->_limit;
+        }
+        //Query
+        $sql = "SELECT chapters.id, chapters.title, chapters.content, users.username, chapters.created_at, chapters.updated_at 
                 FROM chapters
                 INNER JOIN users ON chapters.user_id = users.id
-                ORDER BY id DESC';
+                ORDER BY id DESC
+                LIMIT $this->_start, $this->_limit
+        ";
         $result = $this->createQuery($sql);
         $chapters = [];
         foreach ($result as $row){
@@ -24,8 +38,17 @@ class ChapterDAO extends DAO
             $chapters[$chapterId] = new Chapter($row);
         }
         $result->closeCursor();
+        //Pagination
+        $this->_total = count($chapters);
+        $stmt   = $this->createQuery("SELECT id FROM chapters");
+        $this->_total = $stmt->rowCount();
+
         return $chapters;
  
+    }
+
+    public function getNbPages(){
+        return ceil($this->_total / $this->_limit);//ceil function = return an integer
     }
 
     /**

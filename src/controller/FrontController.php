@@ -14,7 +14,8 @@ class FrontController extends Controller
     public function allChapters()
     {
         $chapters = $this->_chapterDAO->getChapters();
-        return $this->_view->render('allChapters', ['chapters' => $chapters], "Les chapitres" );//Generate view with dynamics datas
+        $nb_pages = $this->_chapterDAO->getNbPages();
+        return $this->_view->render('allChapters', ['chapters' => $chapters], "Les chapitres",$nb_pages );//Generate view with dynamics datas
     }
 
     /**

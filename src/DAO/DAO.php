@@ -27,7 +27,7 @@ abstract class DAO
      * method connect database
      *
      */
-    private function getConnection()
+    protected function getConnection()
     {
         //Attempt to connect to the database
         try{

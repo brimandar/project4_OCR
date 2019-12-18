@@ -1,13 +1,4 @@
-<!-- TinyMCE -->
-    <script src="https://cdn.tiny.cloud/1/irmbudytgj8u8svw00m9xt5gq7tqa8m85x1w1a0j6owdpjdm/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
-        tinymce.init({
-                selector: 'textarea#contentText'
-            });
-    </script>
-<!-- security TinyMCE HTML Purifier -->
 <?php
-    require_once '../vendor/ezyang/htmlpurifier/library/HTMLPurifier.auto.php';
     $config = HTMLPurifier_Config::createDefault();
     $purifier = new HTMLPurifier($config);
 ?>

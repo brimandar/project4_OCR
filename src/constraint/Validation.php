@@ -24,6 +24,14 @@ class Validation
             $newsValidation = new NewsValidation();
             $errors = $newsValidation->check($data);
             return $errors;
+        } elseif ($name === 'contact') {
+            $contactValidation = new ContactValidation();
+            $errors = $contactValidation->check($data);
+            return $errors;
+        } elseif ($name === 'image') {
+            $imageValidation = new ImageValidation();
+            $errors = $imageValidation->check($data);
+            return $errors;
         }
     }
 }

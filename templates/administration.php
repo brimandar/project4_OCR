@@ -30,7 +30,7 @@
                         <td class="pointable" scope="col" onclick="sortTable(0)">Titre</td>
                         <td class="pointable" scope="col" onclick="sortTable(1)">Contenu</td>
                         <td class="pointable" scope="col" onclick="sortTable(2)">Auteur</td>
-                        <td class="pointable" scope="col" onclick="sortTable(3)">Date</td>
+                        <td class="pointable" scope="col" onclick="sortTable(3)">Créé le</td>
                         <td scope="col">Actions</td>
                     </tr>
                 </thead>
@@ -42,16 +42,18 @@
                             <td><a href="../public/index.php?route=chapitre&chapterId=<?= htmlspecialchars($chapter->getId());?>"><?= htmlspecialchars($chapter->getTitle());?></a></td>
                             <td><?= substr($chapter->getContent(), 0, 150);?></td><!-- Limit 150 caracters -->
                             <td><?= htmlspecialchars($chapter->getUsername());?></td>
-                            <td>Créé le : <?= htmlspecialchars($chapter->getCreated_at());?></td>
+                            <td><?= htmlspecialchars($chapter->getCreated_at());?></td>
                             <td>
                                 <a href="../public/index.php?route=editChapter&chapterId=<?= $chapter->getId(); ?>">Modifier</a>
-                                <a class="commandSupprChapter" href="../public/index.php?route=deleteChapter&chapterId=<?= $chapter->getId(); ?>">Supprimer</a>
+                                <a class="command_delete_chapter_admin" href="../public/index.php?route=deleteChapter&chapterId=<?= $chapter->getId(); ?>">Supprimer</a>
+                                <a class="commandSupprChapter" href="#">Supprimer</a>
                             </td>
                         </tr>
                         <?php
                     } ?>
                 </tbody>
             </table>
+            <!-- Pagination -->
             <?php for ($i=1; $i<=$nb_pages; $i++) : ?>
             <a href="../public/index.php?route=administration&page=<?= $i;?> "> <?= $i; ?> </a>
             <?php endfor; ?>

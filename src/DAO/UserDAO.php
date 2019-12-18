@@ -32,6 +32,7 @@ class UserDAO extends DAO
                 INNER JOIN roles ON users.role_id = roles.id 
                 ORDER BY users.id DESC';
         $result = $this->createQuery($sql);
+
         $users = [];
         foreach ($result as $row){
             $userId = $row['id'];

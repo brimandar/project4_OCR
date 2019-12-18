@@ -43,18 +43,25 @@ $( ".select4" ).click(function() {
         }
     }
 });
-
-$('.commandSupprChapter').confirm({
-    content: "...",
-});
-$('.commandSupprChapter').confirm({
+$(".commandSupprChapter").on("click", function() {
+  $.confirm({
+    title: 'Supprimer un chapitre ?',
+    content: 'Attention, la suppression est définitive !',
+    type: 'red',
+    typeAnimated: true,
     buttons: {
-        hey: function(){
-            location.href = this.$target.attr('href');
+        tryAgain: {
+            text: 'Supprimer',
+            btnClass: 'btn-red',
+            action: function(){
+              location.href = $(".command_delete_chapter_admin").attr('href');
+            }
+        },
+        Retour: function () {
         }
     }
+  });
 });
-
 
 function sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -80,13 +87,13 @@ function sortTable(n) {
         /* Check if the two rows should switch place,
         based on the direction, asc or desc: */
         if (dir == "asc") {
-          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          if (x.textContent.toLowerCase() > y.textContent.toLowerCase()) {
             // If so, mark as a switch and break the loop:
             shouldSwitch = true;
             break;
           }
         } else if (dir == "desc") {
-          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          if (x.textContent.toLowerCase() < y.textContent.toLowerCase()) {
             // If so, mark as a switch and break the loop:
             shouldSwitch = true;
             break;

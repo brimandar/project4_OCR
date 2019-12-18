@@ -14,3 +14,8 @@ const DB_HOST = 'mysql:host='.HOST.';dbname='.DB_NAME.';charset='.CHARSET;
 const DB_USER = 'root';
 
 const DB_PASS = '';
+
+// UPLOAD IMAGE
+const DIR_UPLOAD = '../public/uploads/';
+
+const IMG_SIZE_MAX = 500000;

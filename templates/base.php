@@ -58,7 +58,7 @@
         <a class="p-2 text-muted" href="index.php">Accueil</a>
         <a class="p-2 text-muted" href="../public/index.php?route=allChapters">Le roman</a>
         <a class="p-2 text-muted" href="#">Biographie</a>
-        <a class="p-2 text-muted" href="#">Me contacter</a>
+        <a class="p-2 text-muted" href="../public/index.php?route=contact">Me contacter</a>
         </nav>
     </div>
 
@@ -73,4 +73,40 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="../public/js/admin.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<!-- TinyMCE -->
+<script src="https://cdn.tiny.cloud/1/irmbudytgj8u8svw00m9xt5gq7tqa8m85x1w1a0j6owdpjdm/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>
+            tinymce.init({
+                    selector: 'textarea#contentText',
+                    language_url : '../config/languages/fr_FR.js',
+                    language: 'fr_FR',
+                    entity_encoding: "numeric",//This will send the emoticon to DB as HTML Dec code
+                    menubar: "insert",
+                    plugins: [
+                    'advlist autolink lists link image charmap print preview anchor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table paste code  emoticons wordcount fullscreen'
+                    ],
+                    toolbar: 'undo redo | formatselect | ' +
+                    ' bold italic forecolor backcolor | alignleft aligncenter ' +
+                    ' alignright alignjustify | bullist numlist outdent indent |' +
+                    ' removeformat |  emoticons | fullscreen',   
+                    // file_picker_callback: function(callback, value, meta) {
+                    // if (meta.filetype == 'image') {
+                    //     $('#upload').trigger('click');
+                    //     $('#upload').on('change', function() {
+                    //     var file = this.files[0];
+                    //     var reader = new FileReader();
+                    //     reader.onload = function(e) {
+                    //         callback(e.target.result, {
+                    //         alt: ''
+                    //         });
+                    //     };
+                    //     reader.readAsDataURL(file);
+                    //     });
+                    // }
+                    // },  
+            });
+
+        </script>
 </html>

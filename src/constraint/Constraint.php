@@ -35,7 +35,6 @@ class Constraint
         ]);
         $validator = new EmailValidator();
         $emailValidator = $validator->isValid($value, $multipleValidations);
-        var_dump($emailValidator);
         if ($emailValidator === FALSE) 
         {
             return '<p>L\''.$name.' n\'est pas valide</p>';

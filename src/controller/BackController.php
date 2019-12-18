@@ -65,30 +65,34 @@ class BackController extends Controller
     }
     
     /**
-     * Add chapter (administrator only)
+     * Add chapter (administrator only) with upload image
      *
      * @param  array $post
      *
      * @return void
      */
-    public function addChapter(Parameter $post)
+    public function addChapter(Parameter $post, Parameter $file)
     {
         if($this->checkAdmin()) 
         {
             if ($post->get('submit')) 
             {
                 $errors = $this->_validation->validate($post, 'chapter');
-
-                if(!$errors) 
+                $errorImage = $this->_validation->validate($file->get('fileToUpload'), 'image');//manage image errors
+                if(!$errors && !$errorImage) 
                 {
-                    $this->_chapterDAO->addChapter($post, $this->_session->get('id'));
+                    if($file->get('fileToUpload')["name"] != ""){//if image load
+                        $this->_upload->upload($file->get('fileToUpload')["name"], $file->get('fileToUpload')["tmp_name"], $file->get('fileToUpload')["size"]);
+                    }
+                    $this->_chapterDAO->addChapter($post, $this->_session->get('id'), $this->_upload->getPathImage());
                     $this->_session->set('add_chapter', 'Le nouveau chapitre a bien été ajouté');
                     header('Location: ../public/index.php?route=administration');
                 }
 
                 return $this->_view->render('add_chapter', [
                     'post' => $post,
-                    'errors' => $errors
+                    'errors' => $errors,
+                    'errorImage' => $errorImage,
                 ],'Ajouter un chapitre');
             }
             return $this->_view->render('add_chapter',[],'Ajouter un chapitre');

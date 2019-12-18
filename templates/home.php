@@ -5,7 +5,6 @@
 </head>
 <!-- security TinyMCE HTML Purifier -->
 <?php
-    // require_once '../vendor/ezyang/htmlpurifier/library/HTMLPurifier.auto.php';
     $config = HTMLPurifier_Config::createDefault();
     $purifier = new HTMLPurifier($config);
 ?>
@@ -46,7 +45,7 @@
         <div class="col-6 px-0">
             <h1 class="display-4">Mon nouveau roman en ligne <br> <span class="font-italic" >Jean Forteroche</span></h1>
             <p class="lead my-3">Ecrivain dans l'air du temps, je vous présente mon nouveau roman sur ce blog. Je publierai chaque nouveau chapitre à interval régulier. Si vous vous inscrivez, vous pourrez me laisser vos commentaires.</p>
-            <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
+            <p class="lead mb-0"><a href="../public/index.php?route=allChapters" class="text-white font-weight-bold">Accès au livre...</a></p>
         </div>
         <div class="col-6 px-0 media">
             <img class="rounded img-fluid" src="../public/img/alaska.jpg" alt="" srcset="">
@@ -54,7 +53,7 @@
     </div>
 
 </div>
-
+<!-- The last chapter -->
 <div class="row mb-2">
     <div class="col-md-12">
       <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -62,11 +61,16 @@
             <strong class="d-inline-block mb-2 text-primary">Dernier chapitre</strong>
             <h3 class="mb-0"><?= htmlspecialchars($chapter->getTitle());?></h3>
             <div class="mb-1 text-muted"><?= $chapter->getCreated_at();?></div>
-                <p class="card-text mb-auto"><?= $purifier->purify(substr(nl2br($chapter->getContent()),0,300));?>...</p>
-                <a href="index.php?route=chapitre&chapterId=<?= htmlspecialchars($chapter->getId()); ?>" class="stretched-link">Continue reading</a>
+                <p class="card-text mb-auto"><?= $purifier->purify(substr($chapter->getContent(),0,300));?>...</p>
+                <a href="index.php?route=chapitre&chapterId=<?= htmlspecialchars($chapter->getId()); ?>" class="stretched-link">Continuer à lire</a>
             </div>
         <div class="col-auto d-none d-lg-block">
-            <img src="../public/img/last_chapter.jpg" class="bd-placeholder-img" width="200" height="250" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <?php if ($purifier->purify($chapter->getImage())) {
+                $pathImage = '"' . $chapter->getImage() . '"' ;
+            } else {
+                $pathImage = "../public/img/last_chapter.jpg";
+            } ?>
+            <img src=<?= $pathImage ?> class="bd-placeholder-img" width="200" height="250" preserveAspectRatio="xMidYMid slice" focusable="false">
         </div>
     </div>
 </div>

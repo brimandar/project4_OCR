@@ -10,6 +10,7 @@ class Chapter
     private $_created_at;
     private $_updated_at;
     private $_username;
+    private $_image;
 
     public function __construct(array $donnees)
     {
@@ -63,6 +64,11 @@ class Chapter
         $this->_author = $author;
     }
 
+    public function setImage($image)
+    {
+        $this->_image = $image;
+    }
+
     //getters
     public function getId()
     {
@@ -91,6 +97,11 @@ class Chapter
     public function getUsername()
     {
         return $this->_author;
+    }
+
+    public function getImage()
+    {
+        return $this->_image;
     }
 
 }

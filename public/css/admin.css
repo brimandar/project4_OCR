@@ -10,3 +10,7 @@
 .pointable{
     cursor: pointer;
 }
+
+.command_delete_chapter_admin{
+    display: none;
+}

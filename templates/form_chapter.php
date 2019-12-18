@@ -1,22 +1,3 @@
-<!-- TinyMCE -->
-    <script src="https://cdn.tiny.cloud/1/irmbudytgj8u8svw00m9xt5gq7tqa8m85x1w1a0j6owdpjdm/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
-        tinymce.init({
-                selector: 'textarea#contentText',
-                language_url : '../config/languages/fr_FR.js',
-                language: 'fr_FR',
-                menubar: false,
-                plugins: [
-                'advlist autolink lists link image charmap print preview anchor',
-                'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table paste code emoticons wordcount'
-                ],
-                toolbar: 'undo redo | formatselect | ' +
-                ' bold italic forecolor backcolor | alignleft aligncenter ' +
-                ' alignright alignjustify | bullist numlist outdent indent |' +
-                ' removeformat | emoticons',
-                });
-    </script>
 <!-- security TinyMCE HTML Purifier -->
 <?php
     $config = HTMLPurifier_Config::createDefault();
@@ -27,11 +8,17 @@
     $route = isset($chapter) && $chapter->getId() ? 'editChapter&chapterId='.$chapter->getId() : 'addChapter';
     $submit = $route === 'addChapter' ? 'Envoyer' : 'Mettre à jour';
     $title = isset($chapter) && $chapter->getTitle() ? htmlspecialchars($chapter->getTitle()) : '';
-    $content = isset($chapter) && $chapter->getContent() ? $purifier->purify($chapter->getContent()) : '';
+    $content = isset($chapter) && $purifier->purify($chapter->getContent()) ? $purifier->purify($chapter->getContent()) : '';
     $admin = $this->_request->getSession('username')->get('id');
+    
+    if( isset($post)) { 
+        $title = $post->get('title');
+        $content = $post->get('content');
+     };
+
     ?>
 
-    <form method="post" action="../public/index.php?route=<?= $route; ?>">
+    <form method="post" action="../public/index.php?route=<?= $route; ?>" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title">Titre</label>
             <input class="form-control" type="text" id="title" name="title" value="<?= $title; ?>">
@@ -50,6 +37,17 @@
                     </div>
                 <?php endif ?>
         </div>
+        <label for="fileToUpload">Ajouter une image (facultatif)</label><br>
+        <input type="file" name="fileToUpload">
+        <?php if( isset($errorImage) ) : ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?= $errorImage ?>
+                    </div>
+                <?php endif ?>
+
+        <hr>
+
+        <input style="display:none;" name="image" type="file" id="upload" class="hidden" onchange="">
         <input type="submit" value="<?= $submit; ?>" id="submit" name="submit">
 
     </form>

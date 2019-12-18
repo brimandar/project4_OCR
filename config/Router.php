@@ -35,7 +35,7 @@ class Router
                     $this->_frontController->allChapters();
                 }
                 elseif($route === 'addChapter'){
-                    $this->_backController->addChapter($this->_request->getPost());
+                    $this->_backController->addChapter($this->_request->getPost(), $this->_request->getFile());
                 }
                 elseif ($route === 'editChapter'){
                     $this->_backController->editChapter($this->_request->getPost(), $this->_request->getGet()->get('chapterId'), $user_id );
@@ -84,6 +84,9 @@ class Router
                 }
                 elseif($route === 'deleteUser'){
                     $this->_backController->deleteUser($this->_request->getGet()->get('userId'));
+                }
+                elseif($route === 'contact'){
+                    $this->_frontController->contact($this->_request->getPost());
                 }
                 elseif($route === 'administration'){
                     $this->_backController->administration();

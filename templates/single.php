@@ -5,7 +5,7 @@
 
 <div>
     <h2><?= htmlspecialchars($chapter->getTitle());?></h2>
-    <p><?= nl2br(htmlspecialchars($chapter->getContent()));?></p>
+    <p><?= nl2br($chapter->getContent());?></p>
     <p>Créé le : <?= htmlspecialchars($chapter->getCreated_at());?></p>
 </div>
 <br>

@@ -10,12 +10,14 @@ class Request
     private $_get;
     private $_post;
     private $_session;
+    private $_file;
 
     public function __construct()
     {
         $this->_get = new Parameter($_GET);
         $this->_post = new Parameter($_POST);
         $this->_session = new Session($_SESSION);
+        $this->_file = new Parameter($_FILES);
     }
 
 
@@ -47,5 +49,15 @@ class Request
     public function getSession()
     {
         return $this->_session;
+    }
+
+    /**
+     * getFile
+     *
+     * @return array
+     */
+    public function getFile()
+    {
+        return $this->_file;
     }
 }

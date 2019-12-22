@@ -17,19 +17,11 @@ class ChapterDAO extends DAO
      */
     public function getChapters()
     {
-        //Pagination
-        $this->_limit = 2;//max chapters per page
-        $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $this->_start = 0;//offset limit
-        if($current_page > 1){
-            $this->_start = ($current_page * $this->_limit) - $this->_limit;
-        }
         // Query
         $sql = "SELECT chapters.id, chapters.title, chapters.content, users.username, chapters.created_at, chapters.updated_at 
                 FROM chapters
                 INNER JOIN users ON chapters.user_id = users.id
                 ORDER BY id DESC
-                LIMIT $this->_start, $this->_limit
         ";
         $result = $this->createQuery($sql);
         $chapters = [];
@@ -38,17 +30,8 @@ class ChapterDAO extends DAO
             $chapters[$chapterId] = new Chapter($row);
         }
         $result->closeCursor();
-        //Pagination
-        $this->_total = count($chapters);
-        $stmt   = $this->createQuery("SELECT id FROM chapters");
-        $this->_total = $stmt->rowCount();
 
         return $chapters;
- 
-    }
-
-    public function getNbPages(){
-        return ceil($this->_total / $this->_limit);//ceil function = return an integer
     }
 
     /**
@@ -99,19 +82,23 @@ class ChapterDAO extends DAO
         * Permet de récupérer les variables $title, $content et $author de la class Parameter 
         * utilisée dans BackController
         */
-        $sql = 'INSERT INTO chapters (title, content, created_at, user_id, image) VALUES (?, ?, NOW(), ?, ?)';
+        $sql = 'INSERT INTO chapters (title, content, created_at, user_id, image) 
+                VALUES (?, ?, NOW(), ?, ?)';
         $this->createQuery($sql, [$post->get('title'), $post->get('content'), $userId, $pathImage ]);
     }
 
 
-    public function editChapter(Parameter $post, $chapterId, $userId)
+    public function editChapter(Parameter $post, $chapterId, $userId, $pathImage)
     {
-        $sql = 'UPDATE chapters SET title=:title, content=:content, user_id=:user_id, updated_at=NOW() WHERE id=:chapterId';
+        $sql = 'UPDATE chapters 
+                SET title=:title, content=:content, user_id=:user_id, updated_at=NOW(), image=:pathImage 
+                WHERE id=:chapterId';
         $this->createQuery($sql, [
             'title' => $post->get('title'),
             'content' => $post->get('content'),
             'user_id' => $userId,
-            'chapterId' => $chapterId
+            'chapterId' => $chapterId,
+            'pathImage' => $pathImage
         ]);
     }
 

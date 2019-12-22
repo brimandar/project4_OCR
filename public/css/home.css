@@ -12,3 +12,14 @@
 img{
     object-fit: contain;
     }
+
+.derrierePlume{
+    display: flex;
+    padding-left: 20px;
+    align-items: center;
+    height: 200px;
+    background-image: url("../img/background_derriere_plume.jpg");
+    background-position: right;
+    background-size: cover;
+    color: white;
+}

@@ -24,19 +24,19 @@ class View
      *
      * @return page
      */
-    public function render($template, $data = [], $title, int $nb_pages=NULL)
+    public function render($template, $data = [], $title)
     {
         $this->_file = '../templates/'.$template.'.php';
-        $content  = $this->renderFile($this->_file, $data, $nb_pages);
+        $content  = $this->renderFile($this->_file, $data);
         $view = $this->renderFile('../templates/base.php', [
             'title' => $title,
             'content' => $content,
             'session' => $this->_session
-        ], $nb_pages);
+        ]);
         echo $view;
     }
 
-    private function renderFile($file, $data, $nb_pages=NULL)
+    private function renderFile($file, $data)
     {
         if(file_exists($file)){
             extract($data);

@@ -1,3 +1,11 @@
+
+p{
+    font-family: 'Bitter', serif;
+}
+h1, h2, h3{
+    font-family: 'Raleway', sans-serif!important;
+}
+
 /* HR STYLE
  */
 hr.writerLine {

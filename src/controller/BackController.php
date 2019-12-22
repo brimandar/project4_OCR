@@ -50,7 +50,6 @@ class BackController extends Controller
         if($this->checkAdmin()) 
         {
             $chapters = $this->_chapterDAO->getChapters();
-            $nb_pages = $this->_chapterDAO->getNbPages();
             $comments = $this->_commentDAO->getFlagComments();
             $users = $this->_userDAO->getUsers();
             $news = $this->_newsletterDAO->getNews();
@@ -60,7 +59,7 @@ class BackController extends Controller
                 'comments' => $comments,
                 'users' => $users,
                 'news' => $news
-            ], 'Administration', $nb_pages);
+            ], 'Administration');
         }
     }
     
@@ -107,7 +106,7 @@ class BackController extends Controller
      *
      * @return void
      */
-    public function editChapter(Parameter $post, $chapterId, $userId)
+    public function editChapter(Parameter $post, $chapterId, $userId, Parameter $file)
     {
         if($this->checkAdmin()) 
         {
@@ -116,17 +115,22 @@ class BackController extends Controller
             if($post->get('submit')) 
             {
                 $errors = $this->_validation->validate($post, 'chapter');
+                $errorImage = $this->_validation->validate($file->get('fileToUpload'), 'image');//manage image errors
 
-                if(!$errors) 
+                if(!$errors && !$errorImage) 
                 {
-                $this->_chapterDAO->editChapter($post, $chapterId, $userId);
+                    if($file->get('fileToUpload')["name"] != ""){//if image load
+                        $this->_upload->upload($file->get('fileToUpload')["name"], $file->get('fileToUpload')["tmp_name"], $file->get('fileToUpload')["size"]);
+                    }
+                $this->_chapterDAO->editChapter($post, $chapterId, $userId, $this->_upload->getPathImage());
                 $this->_session->set('edit_chapter', 'Le chapitre a bien été modifié');
                 header('Location: ../public/index.php?route=administration');
                 }
 
                 return $this->_view->render('edit_chapter', [
                     'post' => $post,
-                    'errors' => $errors
+                    'errors' => $errors,
+                    'errorImage' => $errorImage,
                 ], 'Editer un chapitre');
 
             }

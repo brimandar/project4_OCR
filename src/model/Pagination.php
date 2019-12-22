@@ -19,20 +19,10 @@ class Pagination extends DAO
      *
      * @return void
      */
-    public function __construct($nbPerPage, $getPage)
+    public function __construct($limit, $getPage)
     {
-        $this->_limit = $nbPerPage;//limit
+        $this->_limit = $limit;//limit
         $this->_getPage = $getPage;
-    }
-
-    /**
-     * curren tPage
-     *
-     * @return void
-     */
-    protected function currentPage()
-    {
-        return $current_page = isset($getPage) ? $getPage : 1;
     }
 
     /**
@@ -42,12 +32,13 @@ class Pagination extends DAO
      */
     public function offset()
     {
-        $start = 0;//offset
-        if($this->currentPage() > 1){
-            $this->_start = ($this->$current_page * $this->_limit) - $this->_limit;
+        $this->_start = 0;//offset
+        $current_page = isset($this->_getPage) ? $this->_getPage : 1;
+        if($current_page > 1){
+            $this->_start = ($current_page * $this->_limit) - $this->_limit;
         }
 
-        return $start;
+        return $this->_start;
     }
 
     /**
@@ -65,6 +56,5 @@ class Pagination extends DAO
 
         return $this->_total;
     }
-
 
 }

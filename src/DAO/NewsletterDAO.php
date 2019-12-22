@@ -82,6 +82,25 @@ class NewsletterDAO extends DAO
         $this->createQuery($sql, [$newsId]);
 
     }
+
+    public function getNewsByMonth(int $year, int $month)
+    {
+        // Query
+        $sql = "SELECT * 
+                FROM news
+                WHERE YEAR(created_at) = ? and MONTH(created_at) = ?
+                ORDER BY created_at DESC
+                ";
+        $result = $this->createQuery($sql, [$year, $month]);
+        $chapters = [];
+        foreach ($result as $row){
+            $newId = $row['id'];
+            $news[$newId] = new Newsletter($row);
+        }
+        $result->closeCursor();
+
+        return $news;
+    }
 }
 
 ?>

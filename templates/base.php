@@ -11,6 +11,10 @@
     <link href="../public/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="../public/css/bootstrap.css" rel="stylesheet">
+    <!-- Fonts Google -->
+    <link href="https://fonts.googleapis.com/css?family=Bitter|Raleway&display=swap" rel="stylesheet"> 
+    <!-- DataTable plugin JQuery -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-flash-1.6.1/r-2.2.3/datatables.min.css"/>
     <!-- Favicons -->
     <link rel="icon" href="../public/img/favicon.png">
     <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
@@ -41,9 +45,6 @@
                 <a class="blog-header-logo text-dark" href="index.php">Billet simple pour l'Alaska</a>
             </div>
             <div class="col-3 d-flex justify-content-end align-items-center">
-                <a class="text-muted" href="#" aria-label="Search">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
-                </a>
                 <?php if ($this->_session->get('username')) : ?>
                     <a class="btn btn-sm btn-outline-danger" href="../public/index.php?route=logout">Déconnexion</a>
                 <?php else : ?>
@@ -68,11 +69,17 @@
 
 </div>
 </body>
+<!-- JQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<!-- Bootstrap -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<!-- Files JS -->
 <script src="../public/js/admin.js"></script>
+<script src="../public/js/allChapters.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<!-- DataBase plugin JQuery -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-flash-1.6.1/r-2.2.3/datatables.min.js"></script>
 <!-- TinyMCE -->
 <script src="https://cdn.tiny.cloud/1/irmbudytgj8u8svw00m9xt5gq7tqa8m85x1w1a0j6owdpjdm/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
         <script>
@@ -109,4 +116,5 @@
             });
 
         </script>
+
 </html>

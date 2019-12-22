@@ -1,3 +1,11 @@
+h2{
+  margin-bottom: 1em;;
+}
+
+table{
+  width: 100%!important;
+}
+
 #modulesAdmin{
     position: relative;
 }

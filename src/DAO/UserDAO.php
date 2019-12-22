@@ -4,6 +4,7 @@ namespace App\src\DAO;
 
 use App\config\Parameter;
 use App\src\model\User;
+use App\src\model\Pagination;
 
 class UserDAO extends DAO
 {
@@ -27,10 +28,11 @@ class UserDAO extends DAO
      */
     public function getUsers()
     {
-        $sql = 'SELECT users.id, users.username, users.created_at, roles.role 
+        $sql = "SELECT users.id, users.username, users.created_at, roles.role 
                 FROM users 
                 INNER JOIN roles ON users.role_id = roles.id 
-                ORDER BY users.id DESC';
+                ORDER BY users.username ASC
+                ";
         $result = $this->createQuery($sql);
 
         $users = [];
@@ -39,6 +41,7 @@ class UserDAO extends DAO
             $users[$userId] = new User($row);
         }
         $result->closeCursor();
+
         return $users;
     }
 

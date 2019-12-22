@@ -38,7 +38,7 @@ class Router
                     $this->_backController->addChapter($this->_request->getPost(), $this->_request->getFile());
                 }
                 elseif ($route === 'editChapter'){
-                    $this->_backController->editChapter($this->_request->getPost(), $this->_request->getGet()->get('chapterId'), $user_id );
+                    $this->_backController->editChapter($this->_request->getPost(), $this->_request->getGet()->get('chapterId'), $user_id,  $this->_request->getFile());
                 }
                 elseif ($route === 'deleteChapter'){
                     $this->_backController->deleteChapter($this->_request->getGet()->get('chapterId'));
@@ -63,6 +63,9 @@ class Router
                 }
                 elseif($route === 'deleteNews'){
                     $this->_backController->deleteNew($this->_request->getGet()->get('newsId'));
+                }
+                elseif($route === 'archives'){
+                    $this->_frontController->newsByMonth($this->_request->getGet()->get('year'),$this->_request->getGet()->get('month'));
                 }
                 elseif($route === 'register'){
                     $this->_frontController->register($this->_request->getPost());

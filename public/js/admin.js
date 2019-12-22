@@ -1,48 +1,51 @@
-$( ".select1" ).click(function() {
-    $("#chapter_admin").css( { display: 'block' });
-    $("#comment_admin, #users_admin, #news_admin").css( { display: 'none' });
-    $(this).addClass("active");
+$( document ).ready(function() {
+  $('#table_chapters_admin, #table_users_admin, #table_newsletters_admin').DataTable( {
+    "lengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
+    responsive: true,
+    "language": 
+    {
+      "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/French.json"
+    }
+    });
+  let url = window.location.href;
+  let route = "pageUsers";
+  if(url.includes(route))
+  {
+      selectedAdmin(".select3","#users_admin","#comment_admin, #chapter_admin, #news_admin",3)
+  }
+});
+
+
+
+// To navigate between pages (display and active list item)
+function selectedAdmin(selectorActif, selectorDisplay, selectorsNotDisplay, nbSelectActive){
+    $(selectorDisplay).css( { display: 'block' });
+    $(selectorsNotDisplay).css( { display: 'none' });
+    $(selectorActif).addClass("active");
     for (let i=1 ; i<5 ; i++) {
-        if (i != 1){
+        if (i != nbSelectActive){
             $(".select" + i).removeClass("active");
         }
     }
+}
+
+$( ".select1" ).click(function() {
+    selectedAdmin(this,"#chapter_admin","#comment_admin, #users_admin, #news_admin",1)
 });
 
 $( ".select2" ).click(function() {
-    $("#comment_admin").css( { display: 'block' });
-    $("#chapter_admin, #users_admin, #news_admin").css( { display: 'none' });
-    $(this).addClass("active");
-    for (let i=1 ; i<5 ; i++) {
-        if (i != 2){
-            $(".select" + i).removeClass("active");
-        }
-    }
+    selectedAdmin(this,"#comment_admin","#chapter_admin, #users_admin, #news_admin",2)
 });
 
 $( ".select3" ).click(function() {
-    $("#users_admin").css( { display: 'block' });
-    $("#comment_admin, #chapter_admin, #news_admin").css( { display: 'none' });
-    $(this).addClass("active");
-    for (let i=1 ; i<5 ; i++) {
-        if (i != 3){
-            $(".select" + i).removeClass("active");
-        }
-    }
+    selectedAdmin(this,"#users_admin","#comment_admin, #chapter_admin, #news_admin",3)
 });
 
 $( ".select4" ).click(function() {
-
-    $("#news_admin").css( { display: 'block' });
-    $("#comment_admin, #chapter_admin, #users_admin").css( { display: 'none' });
-
-    $(this).addClass("active");
-    for (let i=1 ; i<5 ; i++) {
-        if (i != 4){
-            $(".select" + i).removeClass("active");
-        }
-    }
+    selectedAdmin(this,"#news_admin","#comment_admin, #chapter_admin, #users_admin",4)
 });
+
+
 $(".commandSupprChapter").on("click", function() {
   $.confirm({
     title: 'Supprimer un chapitre ?',
@@ -62,58 +65,3 @@ $(".commandSupprChapter").on("click", function() {
     }
   });
 });
-
-function sortTable(n) {
-    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-    table = document.getElementById("table_chapters_admin");
-    switching = true;
-    // Set the sorting direction to ascending:
-    dir = "asc";
-    /* Make a loop that will continue until
-    no switching has been done: */
-    while (switching) {
-      // Start by saying: no switching is done:
-      switching = false;
-      rows = table.rows;
-      /* Loop through all table rows (except the
-      first, which contains table headers): */
-      for (i = 1; i < (rows.length - 1); i++) {
-        // Start by saying there should be no switching:
-        shouldSwitch = false;
-        /* Get the two elements you want to compare,
-        one from current row and one from the next: */
-        x = rows[i].getElementsByTagName("TD")[n];
-        y = rows[i + 1].getElementsByTagName("TD")[n];
-        /* Check if the two rows should switch place,
-        based on the direction, asc or desc: */
-        if (dir == "asc") {
-          if (x.textContent.toLowerCase() > y.textContent.toLowerCase()) {
-            // If so, mark as a switch and break the loop:
-            shouldSwitch = true;
-            break;
-          }
-        } else if (dir == "desc") {
-          if (x.textContent.toLowerCase() < y.textContent.toLowerCase()) {
-            // If so, mark as a switch and break the loop:
-            shouldSwitch = true;
-            break;
-          }
-        }
-      }
-      if (shouldSwitch) {
-        /* If a switch has been marked, make the switch
-        and mark that a switch has been done: */
-        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-        switching = true;
-        // Each time a switch is done, increase this count by 1:
-        switchcount ++;
-      } else {
-        /* If no switching has been done AND the direction is "asc",
-        set the direction to "desc" and run the while loop again. */
-        if (switchcount == 0 && dir == "asc") {
-          dir = "desc";
-          switching = true;
-        }
-      }
-    }
-  }

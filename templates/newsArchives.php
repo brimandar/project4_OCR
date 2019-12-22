@@ -4,25 +4,25 @@
     $purifier = new HTMLPurifier($config);
 ?>
 
-<h1>Tous les chapitres</h1>
-<p class="mb-4">Vous trouverez ici, l'ensemble des chapitres disponibles.</p>
+<h1>Archives des newsletters</h1>
+<p class="mb-4">Vous trouverez ici, mes anciennes actualités.</p>
 
 <table id="allChaptersTable" class=" col-12 table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
                         <td scope="col">Titre</td>
-                        <td scope="col">Extrait</td>
+                        <td scope="col">Contenu</td>
                         <td scope="col">Ajouté le</td>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    foreach ($chapters as $chapter)
+                    foreach ($news as $new)
                     { ?>
                         <tr>
-                            <td><a href="../public/index.php?route=chapitre&chapterId=<?= htmlspecialchars($chapter->getId());?>"><?= htmlspecialchars($chapter->getTitle());?></a></td>
-                            <td><?= $purifier->purify(substr($chapter->getContent(), 0, 1000));?></td>
-                            <td><?= htmlspecialchars($chapter->getCreated_at());?></td>
+                            <td><a href="../public/index.php?route=chapitre&chapterId=<?= htmlspecialchars($new->getId());?>"><?= htmlspecialchars($new->getTitle());?></a></td>
+                            <td><?= $purifier->purify($new->getContent());?></td>
+                            <td><?= htmlspecialchars($new->getCreated_at());?></td>
                         </tr>
                         <?php
                     } ?>

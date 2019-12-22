@@ -13,24 +13,24 @@
 <h1 class="p-3 mb-2 bg-dark text-white">Administration</h1>
 <hr class="softenedLine">
 <div class="row">
-    <div id="list-example" class="col-2 list-group">
+    <div id="list-example" class="col-sm-4 col-md-2 list-group">
         <a class="select1 active list-group-item list-group-item-action" href="#list-item-1">Chapitres</a>
         <a class="select2 list-group-item list-group-item-action" href="#list-item-2">Commentaires</a>
         <a class="select3 list-group-item list-group-item-action" href="#list-item-3">Utilisateurs</a>
         <a class="select4 list-group-item list-group-item-action" href="#list-item-4">News</a>
     </div>
-    <div id="modulesAdmin" class="col-10">
+    <div id="modulesAdmin" class="col-sm-8 col-md-10">
 <!-- Chapters admin -->
-        <div id="chapter_admin">
+        <div id="chapter_admin" class="col-12">
             <h2>Le roman</h2>
             <a class="btn btn-primary btn-lg mb-2" href="../public/index.php?route=addChapter">Nouveau chapitre</a>
             <table id="table_chapters_admin" class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <td class="pointable" scope="col" onclick="sortTable(0)">Titre</td>
-                        <td class="pointable" scope="col" onclick="sortTable(1)">Contenu</td>
-                        <td class="pointable" scope="col" onclick="sortTable(2)">Auteur</td>
-                        <td class="pointable" scope="col" onclick="sortTable(3)">Créé le</td>
+                        <td scope="col">Titre</td>
+                        <td scope="col">Contenu</td>
+                        <td scope="col">Auteur</td>
+                        <td scope="col">Créé le</td>
                         <td scope="col">Actions</td>
                     </tr>
                 </thead>
@@ -53,10 +53,6 @@
                     } ?>
                 </tbody>
             </table>
-            <!-- Pagination -->
-            <?php for ($i=1; $i<=$nb_pages; $i++) : ?>
-            <a href="../public/index.php?route=administration&page=<?= $i;?> "> <?= $i; ?> </a>
-            <?php endfor; ?>
         </div>
 <!-- Comments admin -->
         <div id="comment_admin">
@@ -93,16 +89,16 @@
             <?php endif; ?>
         </div>
 <!-- Newsletter -->
-        <div id="news_admin">
+        <div id="news_admin" class="col-12">
         <h2>Newsletters (visibles sur la page d'accueil)</h2>
         <a class="btn btn-primary btn-lg mb-2" href="../public/index.php?route=addNews">Publier une news</a>
         <?php if($news) : ?>
-            <table class="table table-bordered table-striped">
+            <table id="table_newsletters_admin" class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
                         <td scope="col">Titre</td>
                         <td scope="col">Contenu</td>
-                        <td scope="col">Date</td>
+                        <td scope="col">Date de création</td>
                         <td scope="col">Actions</td>
                     </tr>
                 </thead>
@@ -113,7 +109,7 @@
                         <tr>
                             <td><a href="../public/index.php?route=news&newsId=<?= htmlspecialchars($new->getId());?>"><?= htmlspecialchars($new->getTitle());?></a></td>
                             <td><?= substr($new->getContent(), 0, 150);?></td><!-- Limit 150 caracters -->
-                            <td>Créé le : <?= htmlspecialchars($new->getCreated_at());?></td>
+                            <td><?= htmlspecialchars($new->getCreated_at());?></td>
                             <td>
                                 <a href="../public/index.php?route=editNews&newsId=<?= $new->getId(); ?>">Modifier</a>
                                 <a href="../public/index.php?route=deleteNews&newsId=<?= $new->getId(); ?>">Supprimer</a>
@@ -128,9 +124,9 @@
             <?php endif; ?>
         </div>
 <!-- Users admin -->
-        <div id="users_admin">
+        <div id="users_admin" class="col-12">
             <h2>Gestion des membres</h2>
-            <table class="table table-bordered">
+            <table id="table_users_admin" class="col-12 table table-bordered">
                 <thead class="thead-dark">
                     <tr>
                         <td scope="col">Pseudo</td>

@@ -14,8 +14,11 @@ class FrontController extends Controller
     public function allChapters()
     {
         $chapters = $this->_chapterDAO->getChapters();
-        $nb_pages = $this->_chapterDAO->getNbPages();
-        return $this->_view->render('allChapters', ['chapters' => $chapters], "Les chapitres",$nb_pages );//Generate view with dynamics datas
+        return $this->_view->render(
+            'allChapters', 
+            ['chapters' => $chapters], 
+            "Les chapitres"
+        );//Generate view with dynamics datas
     }
 
     /**
@@ -27,9 +30,17 @@ class FrontController extends Controller
     {
         $chapter = $this->_chapterDAO->lastChapter();
         $news = $this->_newsletterDAO->getNews();
+        //Select month archives
+        $datesArchive = [];
+        foreach ($news as $new) {
+            $dateArchive[] = date('M, Y',strtotime ($new->getCreated_at()));
+        }
+        $monthsChapter = array_unique($dateArchive); //remove duplicate dates
+
         return $this->_view->render('home', [
             'chapter' => $chapter,
-            'news' => $news
+            'news' => $news,
+            'monthsChapter' => $monthsChapter
         ], "Accueil" );//Generate view with dynamics datas
     }
 
@@ -196,5 +207,15 @@ class FrontController extends Controller
             }
         }
         return $this->_view->render('contact', [], 'Formulaire de contact');
+    }
+
+    public function newsByMonth($year, $month)
+    {
+        $news = $this->_newsletterDAO->getNewsByMonth($year, $month);
+        return $this->_view->render(
+            'newsArchives', 
+            ['news' => $news], 
+            "Archives Newsletters"
+        );//Generate view with dynamics datas
     }
 }

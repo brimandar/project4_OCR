@@ -46,7 +46,7 @@
                             <td>
                                 <a href="../public/index.php?route=editChapter&chapterId=<?= $chapter->getId(); ?>">Modifier</a>
                                 <a class="command_delete_chapter_admin" href="../public/index.php?route=deleteChapter&chapterId=<?= $chapter->getId(); ?>">Supprimer</a>
-                                <a class="commandSupprChapter" href="#">Supprimer</a>
+                                <a id="commandSupprChapter_<?= $chapter->getId();?>" class="commandSupprChapter_" href="#">Supprimer</a>
                             </td>
                         </tr>
                         <?php
@@ -112,7 +112,7 @@
                             <td><?= htmlspecialchars($new->getCreated_at());?></td>
                             <td>
                                 <a href="../public/index.php?route=editNews&newsId=<?= $new->getId(); ?>">Modifier</a>
-                                <a href="../public/index.php?route=deleteNews&newsId=<?= $new->getId(); ?>">Supprimer</a>
+                                <a id="btnDeleteNews_<?= $new->getId(); ?>" class="btnDeleteNews_" href="#">Supprimer</a>
                             </td>
                         </tr>
                         <?php
@@ -146,7 +146,7 @@
                         <td><?php
                             if($user->getRole() != 'admin') {
                             ?>
-                            <a href="../public/index.php?route=deleteUser&userId=<?= $user->getId(); ?>">Supprimer</a>
+                            <a id="btnDeleteUser_<?= $user->getId(); ?>" class="btnDeleteUser_" href="#">Supprimer</a>
                             <?php }
                             else { ?>
                             Suppression impossible

@@ -43,6 +43,7 @@ class UserValidation extends Validation
             $this->addError($name, $error);
         }
         elseif ($name === 'password') {
+            $pwdField = $value;
             $error = $this->checkPassword($name, $value);
             $this->addError($name, $error);
         }
@@ -97,7 +98,7 @@ class UserValidation extends Validation
      *
      * @return void
      */
-    private function checkPassword($name, $value)
+    private function checkPassword($name, $value, $confirmpwdField=NULL)
     {
         if($this->_constraint->notBlank($name, $value)) {
             return $this->_constraint->notBlank('password', $value);
@@ -108,6 +109,7 @@ class UserValidation extends Validation
         if($this->_constraint->maxLength($name, $value, 255)) {
             return $this->_constraint->maxLength('password', $value, 255);
         }
+
     }
 
     private function checkEmail($name, $value)

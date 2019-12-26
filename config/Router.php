@@ -3,6 +3,8 @@
 namespace App\config;
 use App\src\controller\FrontController;
 use App\src\controller\BackController;
+use App\src\controller\ContactController;
+use App\src\controller\RegisterController;
 use App\src\controller\ErrorController;
 
 class Router
@@ -10,6 +12,8 @@ class Router
 
     private $_frontController;
     private $_backController;
+    private $_contactController;
+    private $_registerController;
     private $_errorController;
     private $_request;
 
@@ -18,6 +22,8 @@ class Router
         $this->_request = new Request();//load requests GET POST
         $this->_frontController = new FrontController();
         $this->_backController = new BackController();
+        $this->_contactController = new ContactController();
+        $this->_registerController = new RegisterController();
         $this->_errorController = new ErrorController();
     }
     public function run()
@@ -68,7 +74,10 @@ class Router
                     $this->_frontController->newsByMonth($this->_request->getGet()->get('year'),$this->_request->getGet()->get('month'));
                 }
                 elseif($route === 'register'){
-                    $this->_frontController->register($this->_request->getPost());
+                    $this->_registerController->register($this->_request->getPost());
+                }
+                elseif($route === 'confirmation'){
+                    $this->_registerController->confirmationEmail($this->_request->getGet()->get('code'));
                 }
                 elseif($route === 'login'){
                     $this->_frontController->login($this->_request->getPost());
@@ -89,7 +98,7 @@ class Router
                     $this->_backController->deleteUser($this->_request->getGet()->get('userId'));
                 }
                 elseif($route === 'contact'){
-                    $this->_frontController->contact($this->_request->getPost());
+                    $this->_contactController->contact($this->_request->getPost());
                 }
                 elseif($route === 'administration'){
                     $this->_backController->administration();

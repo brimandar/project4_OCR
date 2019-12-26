@@ -22,6 +22,8 @@
         $this->_session->get('flag_comment') ||
         $this->_session->get('delete_comment') ||
         $this->_session->get('register') ||
+        $this->_session->get('update_password') ||
+        $this->_session->get('confirmation') ||
         $this->_session->get('logout') ||
         $this->_session->get('delete_account') ||
         $this->_session->get('need_login') ||
@@ -36,6 +38,8 @@
     <?= $this->_session->show('flag_comment'); ?>
     <?= $this->_session->show('delete_comment'); ?>
     <?= $this->_session->show('register'); ?>
+    <?= $this->_session->show('confirmation'); ?>
+    <?= $this->_session->show('update_password'); ?>
     <?= $this->_session->show('login'); ?>
     <?= $this->_session->show('logout'); ?>
     <?= $this->_session->show('delete_account'); ?>
@@ -107,9 +111,11 @@
       <div class="p-4">
         <h4 class="font-italic">Archives</h4>
         <ol class="list-unstyled mb-0">
-            <?php foreach($monthsChapter as $monthChapter) : ?>
-                <li><a href="../public/index.php?route=archives&year=<?= date('Y', strtotime($monthChapter)); ?>&month=<?= date('m', strtotime($monthChapter)); ?>"><?= $monthChapter ?></a></li>
-            <?php endforeach; ?>
+            <?php if ($monthsChapter != '') : ?>
+                <?php foreach($monthsChapter as $monthChapter) : ?>
+                    <li><a href="../public/index.php?route=archives&year=<?= date('Y', strtotime($monthChapter)); ?>&month=<?= date('m', strtotime($monthChapter)); ?>"><?= $monthChapter ?></a></li>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </ol>
       </div>
 

@@ -34,7 +34,7 @@
                     <?php if ($this->_session->get('role') === 'admin') : ?>
                         <a href="../public/index.php?route=administration">Administration</a>
                     <?php else : ?>
-                        <a href="../public/index.php?route=profile">Profil</a>
+                        <a class="btn btn-info" href="../public/index.php?route=profile">Compte de : <?= $this->_session->get('username');?></a>
                     <?php endif; ?>
                 <?php else : ?>
                     <a class="text-muted" href="../public/index.php?route=register">S'inscrire</a>
@@ -76,6 +76,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <!-- Files JS -->
 <script src="../public/js/admin.js"></script>
+<script src="../public/js/register.js"></script>
 <script src="../public/js/allChapters.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <!-- DataBase plugin JQuery -->

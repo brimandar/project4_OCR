@@ -216,10 +216,51 @@ class BackController extends Controller
     {
         if($this->checkLoggedIn()) 
         {
-            if($post->get('submit')) {
-                $this->_userDAO->updatePassword($post, $this->_session->get('username'));
-                $this->_session->set('update_password', 'Le mot de passe a été mis à jour');
-                header('Location: ../public/index.php?route=profile');
+            if($post->get('submit')) 
+            {
+                $errors = $this->_validation->validate($post, 'User');
+                if(!$errors) 
+                {
+                    // Update in database
+                    $activationcode = $this->_userDAO->updatePassword($post, $this->_session->get('username'));
+                    // Send email
+                    $to = $post->get('email');
+                    $subject ="Modification de votre mot de passe - blog Jean FORTEROCHE";
+                    $headers = "MIME-Version: 1.0"."\r\n";
+                            $headers .= 'Content-type: text/html; charset=UTF-8'."\r\n";
+                            $headers .= 'From:Jean FORTEROCHE <rudy.steffler@gmail.com>'."\r\n";
+                            
+                    $ms ="
+                    <html>
+                    <body>
+                        <div>
+                            <p>Bonjour " . $post->get('username') . ",
+                            </p><br>";
+                    $ms.=
+                            "<p>
+                            Vous avez demandé la modification de votre mot de passe. Pour confirmer et réactiver votre inscription, merci de cliquer sur le lien suivant.
+                            </p>
+                            <p><a href='http://localhost/PROJET4/public/index.php?route=confirmation&code=" .$activationcode. "'>Cliquez pour réactiver votre compte</a>
+                            </p>
+                            <br>
+                            <p> 
+                            A très bientôt sur mon blog.<br>Jean FORTEROCHE
+                            </p>
+                        </div>
+                    </body>
+                    </html>";
+                    mail($to,$subject,$ms,$headers);
+                    // Deconnect
+                    $this->_session->stop();
+                    $this->_session->start();
+                    $this->_session->set('update_password', 'Veuillez confirmer à nouveau votre identité en cliquant sur le lien dans le message qui vient d\'être envoyé');
+                    // Return home page
+                    header('Location: ../public/index.php');
+                }
+                return $this->_view->render('update_password', [
+                    'post' => $post,
+                    'errors' => $errors
+                ], 'Modifier mon mot de passe');
             }
             return $this->_view->render('update_password',[],'Modifier mon mot de passe');
         }

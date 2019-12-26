@@ -17,7 +17,7 @@ function afficherMessageConfirmation()
     $(".messageConfirmation").css({
         marginBottom: '0px'
     })
-    }, 1500); 
+    }, 3000); 
 
 
 }

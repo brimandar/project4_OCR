@@ -35,8 +35,9 @@ class FrontController extends Controller
         foreach ($news as $new) {
             $dateArchive[] = date('M, Y',strtotime ($new->getCreated_at()));
         }
+        if ($datesArchive){
         $monthsChapter = array_unique($dateArchive); //remove duplicate dates
-
+        } else {$monthsChapter='';}
         return $this->_view->render('home', [
             'chapter' => $chapter,
             'news' => $news,
@@ -107,40 +108,6 @@ class FrontController extends Controller
         header('Location: ../public/index.php');
     }
 
-
-    /**
-     * register an user
-     *
-     * @param  array $post
-     *
-     * @return void
-     */
-    public function register(Parameter $post)
-    {
-        // If we are on register view and submit the form
-        if($post->get('submit')) {
-
-            $errors = $this->_validation->validate($post, 'User');
-            // check if pseudo is already used. If TRUE, return an error
-            if($this->_userDAO->checkUser($post)) {
-                $errors['username'] = $this->_userDAO->checkUser($post);
-            }
-            if(!$errors) {
-                $this->_userDAO->register($post);
-                $this->_session->set('register', 'Votre inscription a bien été effectuée');
-                header('Location: ../public/index.php');
-            }
-            return $this->_view->render('register', [
-                'post' => $post,
-                'errors' => $errors
-            ], 'Inscription');
-
-        }
-        // If form not completed, Go to the register view
-        return $this->_view->render('register', [], 'Inscription');
-    }
-
-
     /**
      * login
      *
@@ -154,7 +121,7 @@ class FrontController extends Controller
         {
             $result = $this->_userDAO->login($post);
             // Either the username and the password are valid, and we connect the user using the session system.
-            if($result && $result['isPasswordValid']) 
+            if($result && $result['isPasswordValid'] && $result['status'] == 1) 
             {
                 $this->_session->set('login', 'Content de vous revoir');
                 $this->_session->set('id', $result['result']['id']);
@@ -172,43 +139,14 @@ class FrontController extends Controller
         return $this->_view->render('login',[],"Connection");
     }
 
-    public function contact(Parameter $post)
-    {
-        if($post->get('submit')) 
-        {
-            $errors = $this->_validation->validate($post, 'contact');
-            if(!$errors) 
-            {           
-                // Build POST request recaptcha:
-                $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-                $recaptcha_secret = '6LeDLcgUAAAAAM4OP_McMZpDo8z-WLIHU-bovJOE';
-                $recaptcha_response = $post->get('recaptcha_response');
-                // Make and decode POST request recaptcha:
-                $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
-                $recaptcha = json_decode($recaptcha);
-                var_dump($recaptcha);
-                // Take action based on the score returned:
-                if ($recaptcha->score >= 0.5) 
-                {
-                    // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
-                    $headers[] = 'MIME-Version: 1.0';
-                    $headers[] = 'Content-type: text/html; charset=iso-8859-1';
-                    $headers[] = "From: " . $post->get('name') . "<" . $post->get('email') . ">\r\n";
-                    $toEmail = "rudy.steffler@gmail.com";
-                    $mailSubject = $post->get('title');
-                    $mailBody = $post->get('content');
-                    mail($toEmail, $mailSubject, $mailBody, implode("\r\n", $headers));
-                }
-            } else {
-                return $this->_view->render('contact', [
-                    'post' => $post,
-                    'errors' => $errors
-                ], 'Formulaire de contact');
-            }
-        }
-        return $this->_view->render('contact', [], 'Formulaire de contact');
-    }
-
+    /**
+     * Home page : news By Month (article on the right of the screen )
+     *
+     * @param  mixed $year
+     * @param  mixed $month
+     *
+     * @return void
+     */
     public function newsByMonth($year, $month)
     {
         $news = $this->_newsletterDAO->getNewsByMonth($year, $month);

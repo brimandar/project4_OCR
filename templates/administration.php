@@ -45,8 +45,7 @@
                             <td><?= htmlspecialchars($chapter->getCreated_at());?></td>
                             <td>
                                 <a href="../public/index.php?route=editChapter&chapterId=<?= $chapter->getId(); ?>">Modifier</a>
-                                <a class="command_delete_chapter_admin" href="../public/index.php?route=deleteChapter&chapterId=<?= $chapter->getId(); ?>">Supprimer</a>
-                                <a id="commandSupprChapter_<?= $chapter->getId();?>" class="commandSupprChapter_" href="#">Supprimer</a>
+                                <a id="commandSupprChapter_<?= $chapter->getId();?>" class="commandSupprChapter_" href="#commandSupprChapter_">Supprimer</a>
                             </td>
                         </tr>
                         <?php
@@ -77,7 +76,7 @@
                         <td>Créé le : <?= htmlspecialchars($comment->getCreated_at());?></td>
                         <td>
                             <a href="../public/index.php?route=unflagComment&commentId=<?= $comment->getId(); ?>">Désignaler le commentaire</a>
-                            <a href="../public/index.php?route=deleteComment&commentId=<?= $comment->getId(); ?>">Supprimer le commentaire</a>
+                            <a id="commandSupprCommentAdmin_<?= $comment->getId();?>" class="commandSupprCommentAdmin_" href="#commandSupprCommentAdmin_">Supprimer le commentaire</a>
                         </td>
                     </tr>
                     <?php

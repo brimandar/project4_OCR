@@ -42,8 +42,8 @@ $( ".select4" ).click(function() {
 
 
 
-// Function Delete (chapter, users, News)
-function deleteElt(selectorElt, route, keyId){
+// Function Delete (chapter, comments, users, News)
+function deleteElt(deleteMessage, selectorElt, route, keyId, removeDOmElt){
     $(selectorElt).click(function(){
         var el = this;
         var id = this.id;
@@ -57,7 +57,7 @@ function deleteElt(selectorElt, route, keyId){
         data [keyId] = deleteid
 
         $.confirm({
-            title: 'Supprimer un chapitre ?',
+            title: deleteMessage,
             content: 'Attention, la suppression est définitive !',
             type: 'red',
             typeAnimated: true,
@@ -74,8 +74,8 @@ function deleteElt(selectorElt, route, keyId){
 
                             success: function(){
                             // Remove row from HTML Table
-                            $(el).closest('tr').css('background','tomato');
-                            $(el).closest('tr').fadeOut(800,function(){
+                            $(el).closest(removeDOmElt).css('background','tomato');
+                            $(el).closest(removeDOmElt).fadeOut(800,function(){
                             $(this).remove();
                             });
                             }
@@ -89,8 +89,12 @@ function deleteElt(selectorElt, route, keyId){
     });
 };
 // Delete Chapter
-deleteElt(".commandSupprChapter_", 'deleteChapter', 'chapterId');
+deleteElt("Supprimer ce chapitre ?", ".commandSupprChapter_", 'deleteChapter', 'chapterId', 'tr');
 // Delete Newsletter
-deleteElt(".btnDeleteNews_", 'deleteNews', 'newsId');
+deleteElt("Supprimer cette news ?", ".btnDeleteNews_", 'deleteNews', 'newsId', 'tr');
 // Delete User
-deleteElt(".btnDeleteUser_", 'deleteUser', 'userId');
+deleteElt("Supprimer cet utilisateur ?", ".btnDeleteUser_", 'deleteUser', 'userId', 'tr');
+// Delete comment inappropriate
+deleteElt("Supprimer ce commentaire ?", ".commandSupprCommentAdmin_", 'deleteComment', 'commentId', 'tr');
+// Delete comment (single.php)
+deleteElt("Supprimer ce commentaire ?", ".commandSupprComment_", 'deleteComment', 'commentId', 'div');

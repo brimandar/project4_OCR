@@ -37,6 +37,9 @@ class Router
                 if($route === 'chapitre'){
                     $this->_frontController->chapter($this->_request->getGet()->get('chapterId'));
                 }
+                if($route === 'commentaires'){
+                    $this->_frontController->comments($this->_request->getGet()->get('chapterId'), $this->_request->getGet()->get('lastId'));
+                }
                 elseif($route === 'allChapters'){
                     $this->_frontController->allChapters();
                 }
@@ -83,7 +86,7 @@ class Router
                     $this->_frontController->login($this->_request->getPost());
                 }
                 elseif($route === 'profile'){
-                    $this->_backController->profile();
+                    $this->_backController->profile($user_id);
                 }
                 elseif($route === 'updatePassword'){
                     $this->_backController->updatePassword($this->_request->getPost());

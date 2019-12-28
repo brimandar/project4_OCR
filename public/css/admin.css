@@ -12,7 +12,7 @@ table{
 
 #comment_admin, #users_admin, #news_admin{
     display: none;
-    position: absolute;
+    position: relative;
 }
 
 .pointable{

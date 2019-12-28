@@ -197,11 +197,14 @@ class BackController extends Controller
      *
      * @return void
      */
-    public function profile()
+    public function profile($user)
     {
         if($this->checkLoggedIn()) 
         {
-            return $this->_view->render('profile',[],"Mon compte");
+            $comments = $this->_commentDAO->getMyComments($user);
+            return $this->_view->render('profile',[
+                'comments' => $comments,
+            ],"Mon compte");
         }
     }
 

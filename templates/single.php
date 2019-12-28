@@ -1,61 +1,52 @@
+<head>
+    <link href="../public/css/single.css" rel="stylesheet">
+</head>
+<!-- security TinyMCE HTML Purifier -->
+<?php
+    $config = HTMLPurifier_Config::createDefault();
+    $purifier = new HTMLPurifier($config);
+?>
+
 <?php $title; ?>
+<?php if ($chapter->getImage()) {
+    $pathImage = '"' . $chapter->getImage() . '"' ;
+} else {
+    $pathImage = "../public/img/last_chapter.jpg";
+} ?>
 
-<h1>Mon blog</h1>
-<p>En construction</p>
+<img src=<?= $pathImage ?> class="rounded float-left img-fluid mr-2 mb-2" width="200" height="250" preserveAspectRatio="xMidYMid slice" focusable="false">
 
-<div>
     <h2><?= htmlspecialchars($chapter->getTitle());?></h2>
-    <p><?= nl2br($chapter->getContent());?></p>
-    <p>Créé le : <?= htmlspecialchars($chapter->getCreated_at());?></p>
+    <i>Créé le : <?= htmlspecialchars($chapter->getCreated_at());?></i>
+    <p class="mt-4 text-justify"><?= $purifier->purify($chapter->getContent());?></p>
 </div>
 <br>
 
-<a href="index.php">Retour à l'accueil</a>
-<div id="comments" class="text-left" style="margin-left: 50px">
 
-    <?php
-    if ($this->_session->get('username'))
-    { ?>
-        <h3>Ajouter un commentaire</h3>
-        <?php include('form_comment.php'); ?>
-    <?php 
-    } ?>
+<div id="comments" class="container" style="margin-left: 50px">
+<div class="singlechapterId"><?= htmlspecialchars($chapter->getId())?></div>
+<div class="userIdentification"><?= htmlspecialchars($this->_session->get('username'));?></div>
 
     <h3>Commentaires</h3>
-        
-    <?php
-    if ($comments) 
-    {
-        foreach ($comments as $comment) 
-        {
-    ?>
-            <h4><?= htmlspecialchars($comment->getUsername());?></h4>
-            <p><?= htmlspecialchars($comment->getContent());?></p>
-            <p>Posté le <?= htmlspecialchars($comment->getCreated_at());?></p>
 
-            <?php
-            if ($this->_session->get('username'))
-            {
-                if ($comment->isFlag()) 
-                {
-                    ?> <p>Ce commentaire a déjà été signalé</p> <?php
-                } else {
-                    ?> <p><a href="../public/index.php?route=flagComment&commentId=<?= $comment->getId(); ?>">Signaler le commentaire</a></p> <?php
-                }
-                ?>
-                <!-- if the logged-on user is equal to the user who wrote the message, the delete command is visible -->
-                <?php
-                if ( $this->_session->get('username') === htmlspecialchars($comment->getUsername()) )
-                { ?>
-                <p><a href="../public/index.php?route=deleteComment&commentId=<?= $comment->getId(); ?>">Supprimer le commentaire</a></p>
-                <?php 
-                } 
-            }
-            ?>
-    
-    <?php
-        }
-    }
-    ?>
+    <!-- Add comment -->
+    <?php if ($this->_session->get('username')) : ?>
+        <h3 class="mt-4">Ajouter un commentaire</h3>
+        <form id="formAddCommentUser" class="form-group" method="post" action="#">
+            <label for="content">Message</label><br>
+            <textarea id="content" class="content form-control" name="content"></textarea><br>
+            <input type="submit" class="btn btn-primary" id="btnAddComment" name="submit">
+        </form>
+    <?php else : ?>
+        <p class="mt-4"> 
+            <a href="../public/index.php?route=register">S'inscrire</a> 
+            ou
+            <a href="../public/index.php?route=login">Se connecter</a>
+            pour commenter.
+        </p>
+    <?php endif; ?>
+    <!-- Comments load with AJAX -->
+    <?php include('comments.php'); ?>
 </div>
 
+<div id="loader"><img src="../public/img/loader.gif" alt="loader"></div>

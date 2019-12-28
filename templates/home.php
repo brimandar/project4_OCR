@@ -20,7 +20,6 @@
         $this->_session->get('login') ||
         $this->_session->get('add_comment') ||
         $this->_session->get('flag_comment') ||
-        $this->_session->get('delete_comment') ||
         $this->_session->get('register') ||
         $this->_session->get('update_password') ||
         $this->_session->get('confirmation') ||
@@ -36,7 +35,6 @@
     <?php endif ?>
     <?= $this->_session->show('add_comment'); ?>
     <?= $this->_session->show('flag_comment'); ?>
-    <?= $this->_session->show('delete_comment'); ?>
     <?= $this->_session->show('register'); ?>
     <?= $this->_session->show('confirmation'); ?>
     <?= $this->_session->show('update_password'); ?>
@@ -104,23 +102,23 @@
 
     <aside class="col-md-4 blog-sidebar">
       <div class="p-4 mb-3 bg-light rounded">
-        <h4 class="font-italic">About</h4>
+        <h4 class="font-italic">A propos de moi</h4>
         <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
       </div>
     <!-- Archives (dynamic) -->
       <div class="p-4">
-        <h4 class="font-italic">Archives</h4>
+        <h4 class="font-italic">Archives Newsletters</h4>
         <ol class="list-unstyled mb-0">
-            <?php if ($monthsChapter != '') : ?>
-                <?php foreach($monthsChapter as $monthChapter) : ?>
-                    <li><a href="../public/index.php?route=archives&year=<?= date('Y', strtotime($monthChapter)); ?>&month=<?= date('m', strtotime($monthChapter)); ?>"><?= $monthChapter ?></a></li>
+            <?php if ($monthsNews != '') : ?>
+                <?php foreach($monthsNews as $monthsNew) : ?>
+                    <li><a href="../public/index.php?route=archives&year=<?= date('Y', strtotime($monthsNew)); ?>&month=<?= date('m', strtotime($monthsNew)); ?>"><?= $monthsNew ?></a></li>
                 <?php endforeach; ?>
             <?php endif; ?>
         </ol>
       </div>
 
       <div class="p-4">
-        <h4 class="font-italic">Elsewhere</h4>
+        <h4 class="font-italic">Réseaux Sociaux</h4>
         <ol class="list-unstyled">
           <li><a href="#">GitHub</a></li>
           <li><a href="#">Twitter</a></li>

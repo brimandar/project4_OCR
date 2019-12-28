@@ -8,7 +8,7 @@ use App\src\model\Comment;
 class CommentDAO extends DAO
 {
     /**
-     * Returns the comments of a chapter
+     * Returns the last comments of a chapter (first load)
      *
      * @param  int $chapterId
      *
@@ -16,12 +16,65 @@ class CommentDAO extends DAO
      */
     public function getCommentsFromChapter($chapterId)
     {
-        $sql = 'SELECT com.id, com.content, com.created_at, com.updated_at, com.flag, us.username
+        $sql = "SELECT com.id, com.content, com.created_at, com.updated_at, com.flag, us.username
                 FROM comments com
                 INNER JOIN users us ON com.user_id = us.id
-                WHERE com.chapter_id = ? ';
+                WHERE com.chapter_id = ?
+                ORDER BY com.id DESC
+                LIMIT 0, 5
+                ";
 
         $result = $this->createQuery($sql, [$chapterId]);
+        $default = 'Aucun commentaire';
+        while ($row = $result->fetch())
+        {
+            $comment[] = new Comment($row);
+        }
+        if(isset($comment)) { return $comment; };//test if the variable $comment is not null
+
+        $result->closeCursor();
+    }
+
+    /**
+     * getAjaxComments
+     *
+     * @param  int $chapterId
+     * @param  int $lastId
+     *
+     * @return void
+     */
+    public function getAjaxComments($chapterId, $lastId)
+    {
+        $sql = "SELECT com.id, com.content, com.created_at, com.updated_at, com.flag, us.username
+                FROM comments com
+                INNER JOIN users us ON com.user_id = us.id
+                WHERE com.chapter_id = ? AND com.id < ?
+                ORDER BY com.id DESC
+                LIMIT 0, 5
+                ";
+
+        $result = $this->createQuery($sql, [$chapterId, $lastId]);
+        $default = 'Aucun commentaire';
+        while ($row = $result->fetch())
+        {
+            $comment[] = new Comment($row);
+        }
+        if(isset($comment)) { return $comment; };//test if the variable $comment is not null
+
+        $result->closeCursor();
+    }
+
+    public function getMyComments($user)
+    {
+        $sql = "SELECT com.id, com.content, com.created_at, com.updated_at, com.flag, us.username, chap.title, com.chapter_id
+                FROM comments com
+                INNER JOIN chapters chap ON chap.id = com.chapter_id
+                INNER JOIN users us ON us.id = com.user_id
+                WHERE us.id = ?
+                ORDER BY com.id DESC
+                ";
+
+        $result = $this->createQuery($sql, [$user]);
         $default = 'Aucun commentaire';
         while ($row = $result->fetch())
         {

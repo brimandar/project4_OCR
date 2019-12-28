@@ -11,6 +11,7 @@ class Comment
     private $_created_at;
     private $_updated_at;
     private $_flag;
+    private $_title;
 
 
     public function __construct(array $donnees)
@@ -70,6 +71,11 @@ class Comment
         $this->_flag = $flag;
     }
 
+    public function setTitle($titleChapter)
+    {
+        $this->_title = $titleChapter;
+    }
+
     //getters
     public function getId() { return $this->_id; }
     public function getChapter_id() { return $this->_chapter_id; }
@@ -78,5 +84,5 @@ class Comment
     public function getCreated_at() { return $this->_created_at; }
     public function getUpdated_at() { return $this->_updated_at; }
     public function isFlag() { return $this->_flag; }
-
+    public function getTitleChapter() { return $this->_title; }
 }

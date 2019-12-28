@@ -36,7 +36,16 @@ class View
         echo $view;
     }
 
-    private function renderFile($file, $data)
+    public function renderSimple($template, $data = [])
+    {
+        if ($data){
+        $this->_file = '../templates/'.$template.'.php';
+        $content  = $this->renderFile($this->_file, $data);
+        echo $content;
+        }
+    }
+
+    public function renderFile($file, $data)
     {
         if(file_exists($file)){
             extract($data);

@@ -43,7 +43,7 @@ class ChapterDAO extends DAO
      */
     public function getChapter($chapterId)
     {
-        $sql = 'SELECT chapters.id, chapters.title, chapters.content, users.username, chapters.created_at, chapters.updated_at, chapters.user_id 
+        $sql = 'SELECT chapters.id, chapters.title, chapters.content, users.username, chapters.created_at, chapters.updated_at, chapters.user_id, chapters.image 
                 FROM chapters
                 INNER JOIN users ON chapters.user_id = users.id
                 WHERE chapters.id = ?';

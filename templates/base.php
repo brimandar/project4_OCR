@@ -69,6 +69,15 @@
 
 </div>
 </body>
+
+<footer class="blog-footer">
+  <p>Blog fictif dans le cadre d'un projet d'étude <a href="https://openclassrooms.com/fr/">OpenClassRoom</a> parcours <a href="https://openclassrooms.com/fr/paths/48-developpeur-web-junior">développeur web junior</a>.</p>
+  <p><br>
+    <a href="#">Retour en haut de page</a>
+  </p>
+</footer>
+
+
 <!-- JQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -77,6 +86,7 @@
 <!-- Files JS -->
 <script src="../public/js/admin.js"></script>
 <script src="../public/js/register.js"></script>
+<script src="../public/js/single.js"></script>
 <script src="../public/js/allChapters.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <!-- DataBase plugin JQuery -->

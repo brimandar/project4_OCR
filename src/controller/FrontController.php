@@ -33,15 +33,15 @@ class FrontController extends Controller
         //Select month archives
         $datesArchive = [];
         foreach ($news as $new) {
-            $dateArchive[] = date('M, Y',strtotime ($new->getCreated_at()));
+            $datesArchive[] = date('M, Y',strtotime ($new->getCreated_at()));
         }
         if ($datesArchive){
-        $monthsChapter = array_unique($dateArchive); //remove duplicate dates
-        } else {$monthsChapter='';}
+        $monthsNews = array_unique($datesArchive); //remove duplicate dates
+        } else {$monthsNews='';}
         return $this->_view->render('home', [
             'chapter' => $chapter,
             'news' => $news,
-            'monthsChapter' => $monthsChapter
+            'monthsNews' => $monthsNews
         ], "Accueil" );//Generate view with dynamics datas
     }
 
@@ -63,6 +63,25 @@ class FrontController extends Controller
             // Return variables chapter et comments to the page
     }
 
+    /**
+     * comments for AJAX query
+     *
+     * @param  int $chapterId
+     * @param  int $lastId
+     *
+     * @return void
+     */
+    public function comments($chapterId, $lastId)
+    {
+        $chapter = $this->_chapterDAO->getChapter($chapterId);
+        $comments = $this->_commentDAO->getAjaxComments($chapterId, $lastId);
+        if ($comments){
+            return $this->_view->renderSimple('comments', [
+                'chapter' => $chapter,
+                'comments' => $comments,
+            ]);
+        }
+    }
 
     /**
      * add a comment to an chapter
@@ -85,12 +104,10 @@ class FrontController extends Controller
             $chapter = $this->_chapterDAO->getChapter($chapterId);
             $comments = $this->_commentDAO->getCommentsFromChapter($chapterId);
 
-            return $this->_view->render('single', [
+            return $this->_view->renderSimple('comments', [
                 'chapter' => $chapter,
                 'comments' => $comments,
-                'post' => $post,
-                'errors' => $errors
-            ], '');
+            ]);
     }
 
 

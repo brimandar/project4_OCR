@@ -73,11 +73,9 @@ class FrontController extends Controller
      */
     public function comments($chapterId, $lastId)
     {
-        $chapter = $this->_chapterDAO->getChapter($chapterId);
         $comments = $this->_commentDAO->getAjaxComments($chapterId, $lastId);
         if ($comments){
             return $this->_view->renderSimple('comments', [
-                'chapter' => $chapter,
                 'comments' => $comments,
             ]);
         }

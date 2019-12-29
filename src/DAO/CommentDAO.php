@@ -36,7 +36,7 @@ class CommentDAO extends DAO
     }
 
     /**
-     * getAjaxComments
+     * use for single view
      *
      * @param  int $chapterId
      * @param  int $lastId
@@ -64,6 +64,13 @@ class CommentDAO extends DAO
         $result->closeCursor();
     }
 
+    /**
+     * comments users (profil view)
+     *
+     * @param  mixed $user
+     *
+     * @return void
+     */
     public function getMyComments($user)
     {
         $sql = "SELECT com.id, com.content, com.created_at, com.updated_at, com.flag, us.username, chap.title, com.chapter_id

@@ -20,7 +20,7 @@
         <a class="select4 list-group-item list-group-item-action" href="#list-item-4">News</a>
     </div>
     <div id="modulesAdmin" class="col-sm-8 col-md-10">
-<!-- Chapters admin -->
+        <!-- Chapters admin -->
         <div id="chapter_admin" class="col-12">
             <h2>Le roman</h2>
             <a class="btn btn-primary btn-lg mb-2" href="../public/index.php?route=addChapter">Nouveau chapitre</a>
@@ -38,22 +38,26 @@
                     <?php
                     foreach ($chapters as $chapter)
                     { ?>
-                        <tr>
-                            <td><a href="../public/index.php?route=chapitre&chapterId=<?= htmlspecialchars($chapter->getId());?>"><?= htmlspecialchars($chapter->getTitle());?></a></td>
-                            <td><?= substr($chapter->getContent(), 0, 150);?></td><!-- Limit 150 caracters -->
-                            <td><?= htmlspecialchars($chapter->getUsername());?></td>
-                            <td><?= htmlspecialchars($chapter->getCreated_at());?></td>
-                            <td>
-                                <a href="../public/index.php?route=editChapter&chapterId=<?= $chapter->getId(); ?>">Modifier</a>
-                                <a id="commandSupprChapter_<?= $chapter->getId();?>" class="commandSupprChapter_" href="#commandSupprChapter_">Supprimer</a>
-                            </td>
-                        </tr>
-                        <?php
+                    <tr>
+                        <td><a
+                                href="../public/index.php?route=chapitre&chapterId=<?= htmlspecialchars($chapter->getId());?>"><?= htmlspecialchars($chapter->getTitle());?></a>
+                        </td>
+                        <td><?= substr($chapter->getContent(), 0, 150);?></td><!-- Limit 150 caracters -->
+                        <td><?= htmlspecialchars($chapter->getUsername());?></td>
+                        <td><?= htmlspecialchars($chapter->getCreated_at());?></td>
+                        <td>
+                            <a
+                                href="../public/index.php?route=editChapter&chapterId=<?= $chapter->getId(); ?>">Modifier</a>
+                            <a id="commandSupprChapter_<?= $chapter->getId();?>" class="commandSupprChapter_"
+                                href="#commandSupprChapter_">Supprimer</a>
+                        </td>
+                    </tr>
+                    <?php
                     } ?>
                 </tbody>
             </table>
         </div>
-<!-- Comments admin -->
+        <!-- Comments admin -->
         <div id="comment_admin">
             <h2>Commentaires signalés</h2>
             <?php if($comments) : ?>
@@ -66,32 +70,30 @@
                         <td scope="col">Actions</td>
                     </tr>
                 </thead>
-                <?php
-                foreach ($comments as $comment)
-                {
-                    ?>
-                    <tr>
-                        <td><?= htmlspecialchars($comment->getUsername());?></td>
-                        <td><?= substr(htmlspecialchars($comment->getContent()), 0, 150);?></td>
-                        <td>Créé le : <?= htmlspecialchars($comment->getCreated_at());?></td>
-                        <td>
-                            <a href="../public/index.php?route=unflagComment&commentId=<?= $comment->getId(); ?>">Désignaler le commentaire</a>
-                            <a id="commandSupprCommentAdmin_<?= $comment->getId();?>" class="commandSupprCommentAdmin_" href="#commandSupprCommentAdmin_">Supprimer le commentaire</a>
-                        </td>
-                    </tr>
-                    <?php
-                }
-                ?>
+                <?php foreach ($comments as $comment)
+                { ?>
+                <tr>
+                    <td><?= htmlspecialchars($comment->getUsername());?></td>
+                    <td><?= substr(htmlspecialchars($comment->getContent()), 0, 150);?></td>
+                    <td>Créé le : <?= htmlspecialchars($comment->getCreated_at());?></td>
+                    <td>
+                        <a href="../public/index.php?route=unflagComment&commentId=<?= $comment->getId(); ?>">Désignaler
+                            le commentaire</a>
+                        <a id="commandSupprCommentAdmin_<?= $comment->getId();?>" class="commandSupprCommentAdmin_"
+                            href="#commandSupprCommentAdmin_">Supprimer le commentaire</a>
+                    </td>
+                </tr>
+                <?php } ?>
             </table>
             <?php else : ?>
-                <p>Aucun commentaire n'a été signalé.</p>
+            <p>Aucun commentaire n'a été signalé.</p>
             <?php endif; ?>
         </div>
-<!-- Newsletter -->
+        <!-- Newsletter -->
         <div id="news_admin" class="col-12">
-        <h2>Newsletters (visibles sur la page d'accueil)</h2>
-        <a class="btn btn-primary btn-lg mb-2" href="../public/index.php?route=addNews">Publier une news</a>
-        <?php if($news) : ?>
+            <h2>Newsletters (visibles sur la page d'accueil)</h2>
+            <a class="btn btn-primary btn-lg mb-2" href="../public/index.php?route=addNews">Publier une news</a>
+            <?php if($news) : ?>
             <table id="table_newsletters_admin" class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
@@ -105,24 +107,25 @@
                     <?php
                     foreach ($news as $new)
                     { ?>
-                        <tr>
-                            <td><a href="../public/index.php?route=news&newsId=<?= htmlspecialchars($new->getId());?>"><?= htmlspecialchars($new->getTitle());?></a></td>
-                            <td><?= substr($new->getContent(), 0, 150);?></td><!-- Limit 150 caracters -->
-                            <td><?= htmlspecialchars($new->getCreated_at());?></td>
-                            <td>
-                                <a href="../public/index.php?route=editNews&newsId=<?= $new->getId(); ?>">Modifier</a>
-                                <a id="btnDeleteNews_<?= $new->getId(); ?>" class="btnDeleteNews_" href="#">Supprimer</a>
-                            </td>
-                        </tr>
-                        <?php
-                    } ?>
+                    <tr>
+                        <td><a
+                                href="../public/index.php?route=news&newsId=<?= htmlspecialchars($new->getId());?>"><?= htmlspecialchars($new->getTitle());?></a>
+                        </td>
+                        <td><?= substr($new->getContent(), 0, 150);?></td><!-- Limit 150 caracters -->
+                        <td><?= htmlspecialchars($new->getCreated_at());?></td>
+                        <td>
+                            <a href="../public/index.php?route=editNews&newsId=<?= $new->getId(); ?>">Modifier</a>
+                            <a id="btnDeleteNews_<?= $new->getId(); ?>" class="btnDeleteNews_" href="#">Supprimer</a>
+                        </td>
+                    </tr>
+                    <?php } ?>
                 </tbody>
             </table>
             <?php else : ?>
-                <p>Aucune newsletter.</p>
+            <p>Aucune newsletter.</p>
             <?php endif; ?>
         </div>
-<!-- Users admin -->
+        <!-- Users admin -->
         <div id="users_admin" class="col-12">
             <h2>Gestion des membres</h2>
             <table id="table_users_admin" class="col-12 table table-bordered">
@@ -133,37 +136,27 @@
                         <td scope="col">Rôle</td>
                         <td scope="col">Actions</td>
                     </tr>
-                </thead>    
+                </thead>
                 <?php
                 foreach ($users as $user)
-                {
-                    ?>
-                    <tr>
-                        <td><?= htmlspecialchars($user->getUsername());?></td>
-                        <td><?= htmlspecialchars($user->getCreated_at());?></td>
-                        <td><?= htmlspecialchars($user->getRole());?></td>
-                        <td><?php
+                { ?>
+                <tr>
+                    <td><?= htmlspecialchars($user->getUsername());?></td>
+                    <td><?= htmlspecialchars($user->getCreated_at());?></td>
+                    <td><?= htmlspecialchars($user->getRole());?></td>
+                    <td><?php
                             if($user->getRole() != 'admin') {
                             ?>
-                            <a id="btnDeleteUser_<?= $user->getId(); ?>" class="btnDeleteUser_" href="#">Supprimer</a>
-                            <?php }
+                        <a id="btnDeleteUser_<?= $user->getId(); ?>" class="btnDeleteUser_" href="#">Supprimer</a>
+                        <?php }
                             else { ?>
-                            Suppression impossible
-                            <?php } ?>
-                        </td>
-                    </tr>
+                        Suppression impossible
+                        <?php } ?>
+                    </td>
+                </tr>
                 <?php
-                }
-                ?>
+                } ?>
             </table>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-

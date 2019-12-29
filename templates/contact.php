@@ -3,7 +3,7 @@
 <h1>Formulaire de contact</h1>
 <p>Une remarque ? Une suggestion ? N'hésitez-pas à m'écrire.</p>
 <hr class="writerLine">
-<div>
+<div class="container">
     <form method="post" action="../public/index.php?route=contact">
 
         <div class="form-row">

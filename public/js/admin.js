@@ -1,15 +1,31 @@
 //Load JQuery plugin DataTable
+function datatableLoad(selectors)  {
+    $(selectors).DataTable( {
+        "lengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
+        responsive: true,
+        "language": 
+        {
+          "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/French.json"
+        }
+        });
+}
+
+// Load only the menu displayed
 $( document ).ready(function() {
-  $('#table_chapters_admin, #table_users_admin, #table_newsletters_admin').DataTable( {
-    "lengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
-    responsive: true,
-    "language": 
-    {
-      "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/French.json"
-    }
-    });
+    datatableLoad('#table_chapters_admin');
 });
 
+$( ".select2" ).click(function() {
+    datatableLoad('#table-comments-profil');
+  });
+
+$( ".select3" ).click(function() {
+    datatableLoad('#table_users_admin');
+  });
+
+$( ".select4" ).click(function() {
+datatableLoad('#table_newsletters_admin');
+});
 
 
 // To navigate between pages (display and active list item)

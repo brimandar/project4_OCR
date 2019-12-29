@@ -1,11 +1,21 @@
 //Infinite Scroll
+// initialize a var ajaxready to true at the first loading of the function
+$(window).data('ajaxready', true);
+
 $(window).scroll(function () {
 
+    // if ajaxready is false, stop function
+    if ($(window).data('ajaxready') == false) return;
+
+    let lastId = parseInt($(".item").last().attr('id'));//Last comment load
     let chapterId = encodeURIComponent($(".singlechapterId").html());
-    let lastId = $(".item").last().attr('id');//Last comment load
 
     // End of the document reached?
     if ($(document).height() - $(this).height() == $(this).scrollTop()) {
+
+        // when the script start, set ajaxreayd to false. So, navigator can't run another task
+        $(window).data('ajaxready', false);
+
         $("#loader").show();
         // If end page, add comments with AJAX
         $.ajax({
@@ -13,8 +23,11 @@ $(window).scroll(function () {
             success: function (html) 
             {
                 if(html){
-                    $(".post").append(html);
+                    console.log(lastId);
+                    $(".post").last().append(html);
                     $("#loader").hide();
+                    // set ajaxready to false to continue
+                    $(window).data('ajaxready', true);
                 } else {
                     $("#loader").hide();
                     return;
@@ -36,7 +49,6 @@ $("#formAddCommentUser").submit(function(e)
     let chapterId = $(".singlechapterId").html();
     let user = $('.userIdentification').html();
     let message =  $('.content').val() ;
-    console.log(user);
     $.ajax({
         url: "../public/index.php?route=addComment&chapterId=" + chapterId,
         type: 'POST',

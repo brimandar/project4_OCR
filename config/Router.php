@@ -107,7 +107,7 @@ class Router
                     $this->_backController->administration();
                 }
                 else{
-                    $this->_errorController->errorNotFound();
+                    ///$this->_errorController->errorNotFound();
                 }
             }
             else{

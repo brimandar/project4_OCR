@@ -119,11 +119,11 @@ class BackController extends Controller
 
                 if(!$errors && !$errorImage) 
                 {
-                    if($file->get('fileToUpload')["name"] != ""){//if image load
+                    if($file->get('fileToUpload')["name"] != ""){//if image load, save new image
                         $this->_upload->upload($file->get('fileToUpload')["name"], $file->get('fileToUpload')["tmp_name"], $file->get('fileToUpload')["size"]);
+                        unlink($post->get('imageURL'));//Delete old image
                     }
                 $this->_chapterDAO->editChapter($post, $chapterId, $userId, $this->_upload->getPathImage());
-                $this->_session->set('edit_chapter', 'Le chapitre a bien été modifié');
                 header('Location: ../public/index.php?route=administration');
                 }
 
@@ -152,8 +152,9 @@ class BackController extends Controller
     {
         if($this->checkAdmin()) 
         {
+            $chapter = $this->_chapterDAO->getChapter($chapterId);
+            unlink($chapter->getImage());//Delete image
             $this->_chapterDAO->deleteArticle($chapterId);
-            $this->_session->set('delete_chapter', 'Le chapitre a bien été supprimé');
             header('Location: ../public/index.php?route=administration');
         }
     }
@@ -170,7 +171,6 @@ class BackController extends Controller
         if($this->checkLoggedIn()) 
         {
             $this->_commentDAO->deleteComment($commentId);
-            $this->_session->set('delete_comment', 'Le commentaire a bien été supprimé');
             header('Location: ../public/index.php');
         }
     }
@@ -327,7 +327,6 @@ class BackController extends Controller
         if($this->checkAdmin()) 
         {
             $this->_userDAO->deleteUser($userId);
-            $this->_session->set('delete_user', 'L\'utilisateur a bien été supprimé');
             header('Location: ../public/index.php?route=administration');
         }
     }
@@ -350,7 +349,6 @@ class BackController extends Controller
                 if(!$errors) 
                 {
                     $this->_newsletterDAO->addNew($post, $this->_session->get('id'));
-                    $this->_session->set('add_news', 'La newsletter a bien été ajoutée');
                     header('Location: ../public/index.php?route=administration');
                 }
 
@@ -382,7 +380,6 @@ class BackController extends Controller
                 if(!$errors) 
                 {
                 $this->_newsletterDAO->editNew($post, $newsId);
-                $this->_session->set('edit_news', 'Le chapitre a bien été modifié');
                 header('Location: ../public/index.php?route=administration');
                 }
                 return $this->_view->render('edit_news', [
@@ -408,7 +405,6 @@ class BackController extends Controller
         if($this->checkAdmin()) 
         {
             $this->_newsletterDAO->deleteNew($newsId);
-            $this->_session->set('delete_news', 'La newsletter a bien été supprimée');
             header('Location: ../public/index.php?route=administration');
         }
     }

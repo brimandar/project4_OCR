@@ -25,6 +25,31 @@ class NewsletterDAO extends DAO
         return $news;
     }
 
+    /**
+     * get Lasts News for home pâge
+     *
+     * @return void
+     */
+    public function getLastsNews()
+    {
+        $sql = 'SELECT * FROM news ORDER BY id DESC LIMIT 5';
+        $result = $this->createQuery($sql);
+        $news = [];
+        foreach ($result as $row){
+            $newsId = $row['id'];
+            $news[$newsId] = new Newsletter($row);
+        }
+        $result->closeCursor();
+        return $news;
+    }
+
+    /**
+     * get a simple New
+     *
+     * @param  int $newsId
+     *
+     * @return void
+     */
     public function getNew($newsId)
     {
         $sql = 'SELECT * FROM news WHERE id = ?';

@@ -16,15 +16,27 @@ $( document ).ready(function() {
 });
 
 $( ".select2" ).click(function() {
+    if($("#table-comments-profil" ).hasClass("dataTable")){
+        return;
+    } else {
     datatableLoad('#table-comments-profil');
-  });
+    };
+});
 
 $( ".select3" ).click(function() {
+    if($("#table_users_admin" ).hasClass("dataTable")){
+        return;
+    } else {
     datatableLoad('#table_users_admin');
-  });
+    };
+});
 
 $( ".select4" ).click(function() {
-datatableLoad('#table_newsletters_admin');
+    if($("#table_newsletters_admin" ).hasClass("dataTable")){
+        return;
+    } else {
+        datatableLoad('#table_newsletters_admin');
+    };
 });
 
 

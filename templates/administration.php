@@ -3,12 +3,11 @@
 </head>
 <?php $title; ?>
 
-<?= $this->_session->show('add_chapter'); ?>
-<?= $this->_session->show('edit_chapter'); ?>
-<?= $this->_session->show('delete_chapter'); ?>
-<?= $this->_session->show('delete_comment'); ?>
-<?= $this->_session->show('unflag_comment'); ?>
-<?= $this->_session->show('delete_user'); ?>
+<!-- security TinyMCE HTML Purifier -->
+<?php
+    $config = HTMLPurifier_Config::createDefault();
+    $purifier = new HTMLPurifier($config);
+?>
 
 <h1 class="p-3 mb-2 bg-dark text-white">Administration</h1>
 <hr class="softenedLine">
@@ -42,7 +41,7 @@
                         <td><a
                                 href="../public/index.php?route=chapitre&chapterId=<?= htmlspecialchars($chapter->getId());?>"><?= htmlspecialchars($chapter->getTitle());?></a>
                         </td>
-                        <td><?= substr($chapter->getContent(), 0, 150);?></td><!-- Limit 150 caracters -->
+                        <td><?= $purifier->purify(substr($chapter->getContent(), 0, 150));?></td><!-- Limit 150 caracters -->
                         <td><?= htmlspecialchars($chapter->getUsername());?></td>
                         <td><?= htmlspecialchars($chapter->getCreated_at());?></td>
                         <td>
@@ -108,10 +107,8 @@
                     foreach ($news as $new)
                     { ?>
                     <tr>
-                        <td><a
-                                href="../public/index.php?route=news&newsId=<?= htmlspecialchars($new->getId());?>"><?= htmlspecialchars($new->getTitle());?></a>
-                        </td>
-                        <td><?= substr($new->getContent(), 0, 150);?></td><!-- Limit 150 caracters -->
+                        <td><?= htmlspecialchars($new->getTitle());?></td>
+                        <td><?= $purifier->purify(substr($new->getContent(), 0, 150));?></td><!-- Limit 150 caracters -->
                         <td><?= htmlspecialchars($new->getCreated_at());?></td>
                         <td>
                             <a href="../public/index.php?route=editNews&newsId=<?= $new->getId(); ?>">Modifier</a>

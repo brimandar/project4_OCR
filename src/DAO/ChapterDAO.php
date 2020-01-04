@@ -90,6 +90,9 @@ class ChapterDAO extends DAO
 
     public function editChapter(Parameter $post, $chapterId, $userId, $pathImage)
     {
+        if($pathImage == NULL && $post->get('imageURL') != NULL){
+            $pathImage = $post->get('imageURL');
+        }
         $sql = 'UPDATE chapters 
                 SET title=:title, content=:content, user_id=:user_id, updated_at=NOW(), image=:pathImage 
                 WHERE id=:chapterId';

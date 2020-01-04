@@ -27,7 +27,6 @@
         $this->_session->get('not_admin')
         ) : ?>
     <script>
-        // alert("Bonjour");
         afficherMessageConfirmation();
     </script>
     <?php endif ?>
@@ -88,7 +87,7 @@
         <div class="row">
             <div class="col-md-8 blog-main">
                 <h3 class="derrierePlume pb-4 mb-4 font-italic border-bottom">
-                    Derrière la plume...<br>Mes dernières nouvelles
+                    Derrière la plume...<br>Mes 5 dernières nouvelles
                 </h3>
 
                 <hr>
@@ -107,8 +106,8 @@
             <aside class="col-md-4 blog-sidebar">
                 <div class="p-4 mb-3 bg-light rounded">
                     <h4 class="font-italic">A propos de moi</h4>
-                    <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur
-                        purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+                    <p class="mb-0">J'aime par dessus tout voyager, <em>être libre</em>, pour me construire une multitude d'aventures alimentant mes romans.
+                        L'Alaska a été une destination toute particulière. Ce pays est aussi froid que chaleureux. Les rencontres n'ont donné l'idée de ce roman.</p>
                 </div>
                 <!-- Archives (dynamic) -->
                 <div class="p-4">
@@ -117,7 +116,7 @@
                         <?php if ($monthsNews != '') : ?>
                         <?php foreach($monthsNews as $monthsNew) : ?>
                         <li><a
-                                href="../public/index.php?route=archives&year=<?= date('Y', strtotime($monthsNew)); ?>&month=<?= date('m', strtotime($monthsNew)); ?>"><?= $monthsNew ?></a>
+                                href="../public/index.php?route=archives&year=<?= substr($monthsNew, -4); ?>&month=<?= date('m', strtotime($monthsNew)); ?>"><?= $monthsNew ?></a>
                         </li>
                         <?php endforeach; ?>
                         <?php endif; ?>
@@ -127,9 +126,9 @@
                 <div class="p-4">
                     <h4 class="font-italic">Réseaux Sociaux</h4>
                     <ol class="list-unstyled">
-                        <li><a href="#">GitHub</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Facebook</a></li>
+                        <li><a href="https://github.com/brimandar/project4_OCR">GitHub</a></li>
+                        <li><a href="https://twitter.com/JForteroche">Twitter</a></li>
+                        <li><a href="https://www.facebook.com/groups/210033549406928/">Facebook - Nos plus belles lectures</a></li>
                     </ol>
                 </div>
             </aside><!-- /.blog-sidebar -->

@@ -4,3 +4,23 @@
 .singlechapterId, .userIdentification{
     display: none;
 }
+
+.progression{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+  }
+  .header-proper{
+    width: 80%;
+    margin: 0 auto;
+  }
+  .scroll-line{
+    height: 2px;
+    margin-bottom: -2px;
+    background: blue;
+    width: 0%;
+  }

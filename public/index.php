@@ -1,6 +1,6 @@
 <?php
 //ROUTER
-require '../config/dev.php';//to change to pass prod <-> dev
+require '../config/dev.php';//change to pass prod <-> dev
 require '../vendor/autoload.php';
 
 session_start();

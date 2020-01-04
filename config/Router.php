@@ -37,11 +37,14 @@ class Router
                 if($route === 'chapitre'){
                     $this->_frontController->chapter($this->_request->getGet()->get('chapterId'));
                 }
-                if($route === 'commentaires'){
+                elseif($route === 'commentaires'){
                     $this->_frontController->comments($this->_request->getGet()->get('chapterId'), $this->_request->getGet()->get('lastId'));
                 }
                 elseif($route === 'allChapters'){
                     $this->_frontController->allChapters();
+                }
+                elseif($route === 'biography'){
+                    $this->_frontController->biography();
                 }
                 elseif($route === 'addChapter'){
                     $this->_backController->addChapter($this->_request->getPost(), $this->_request->getFile());
@@ -107,7 +110,7 @@ class Router
                     $this->_backController->administration();
                 }
                 else{
-                    ///$this->_errorController->errorNotFound();
+                    $this->_errorController->errorNotFound();
                 }
             }
             else{

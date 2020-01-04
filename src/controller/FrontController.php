@@ -29,6 +29,7 @@ class FrontController extends Controller
     public function home()
     {
         $chapter = $this->_chapterDAO->lastChapter();
+        $lastNews = $this->_newsletterDAO->getLastsNews();
         $news = $this->_newsletterDAO->getNews();
         //Select month archives
         $datesArchive = [];
@@ -40,7 +41,7 @@ class FrontController extends Controller
         } else {$monthsNews='';}
         return $this->_view->render('home', [
             'chapter' => $chapter,
-            'news' => $news,
+            'news' => $lastNews,
             'monthsNews' => $monthsNews
         ], "Accueil" );//Generate view with dynamics datas
     }
@@ -170,5 +171,19 @@ class FrontController extends Controller
             ['news' => $news], 
             "Archives Newsletters"
         );//Generate view with dynamics datas
+    }
+
+    /**
+     * biography view
+     *
+     * @return void
+     */
+    public function biography()
+    {
+        return $this->_view->render(
+            'biography', 
+            [], 
+            "Biographie"
+        );
     }
 }

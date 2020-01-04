@@ -58,7 +58,7 @@
         <nav class="nav d-flex justify-content-between">
         <a class="p-2 text-muted" href="index.php">Accueil</a>
         <a class="p-2 text-muted" href="../public/index.php?route=allChapters">Le roman</a>
-        <a class="p-2 text-muted" href="#">Biographie</a>
+        <a class="p-2 text-muted" href="../public/index.php?route=biography">Biographie</a>
         <a class="p-2 text-muted" href="../public/index.php?route=contact">Me contacter</a>
         </nav>
     </div>
@@ -108,22 +108,7 @@
                     toolbar: 'undo redo | formatselect | ' +
                     ' bold italic forecolor backcolor | alignleft aligncenter ' +
                     ' alignright alignjustify | bullist numlist outdent indent |' +
-                    ' removeformat |  emoticons | fullscreen',   
-                    // file_picker_callback: function(callback, value, meta) {
-                    // if (meta.filetype == 'image') {
-                    //     $('#upload').trigger('click');
-                    //     $('#upload').on('change', function() {
-                    //     var file = this.files[0];
-                    //     var reader = new FileReader();
-                    //     reader.onload = function(e) {
-                    //         callback(e.target.result, {
-                    //         alt: ''
-                    //         });
-                    //     };
-                    //     reader.readAsDataURL(file);
-                    //     });
-                    // }
-                    // },  
+                    ' removeformat |  emoticons | image | fullscreen',   
             });
 
         </script>

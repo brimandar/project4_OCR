@@ -43,7 +43,7 @@ class RegisterController extends Controller
                         "<p>
                         Votre compte a bien été créé sur le blog de Jean FORTEROCHE. Pour confirmer et activer votre inscription, merci de cliquer sur le lien suivant.
                         </p>
-                        <p><a href='http://localhost/PROJET4/public/index.php?route=confirmation&code=" .$activationcode. "'>Cliquez pour activer votre compte</a>
+                        <p><a href='/index.php?route=confirmation&code=" .$activationcode. "'>Cliquez pour activer votre compte</a>
                         </p>
                         <br>
                         <p> 
@@ -54,7 +54,7 @@ class RegisterController extends Controller
                 </html>";
                 mail($to,$subject,$ms,$headers);
                 // Return to home page
-                header('Location: ../public/index.php');
+                header('Location: /index.php');
             }
             return $this->_view->render('register', [
                 'post' => $post,
@@ -77,7 +77,7 @@ class RegisterController extends Controller
     {
         $confirmationMsg = $this->_userDAO->confirmationEmail($code);
         $this->_session->set('confirmation', 'Votre inscription est bien confirmée et validée !');
-        header('Location: ../public/index.php');
+        header('Location: /index.php');
         echo "<script>alert($confirmationMsg)</script>";
     }
 

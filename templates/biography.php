@@ -3,7 +3,7 @@
     <h1 class="mb-4">Ma Biographie</h1>
 
     <div>
-        <img class="float-right" src="../public/img/lunettes.jpg" alt="Image d'un livre avec une paire de lunettes">
+        <img class="float-right" src="/img/lunettes.jpg" alt="Image d'un livre avec une paire de lunettes">
 
         <p>De roman en roman, Jean FORTEROCHE a noué un lien unique avec les lecteurs.</p>
         <br>

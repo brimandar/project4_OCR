@@ -96,7 +96,7 @@ function deleteElt(deleteMessage, selectorElt, route, keyId, removeDOmElt){
                     action: function(){
                         // AJAX Request
                         $.ajax({
-                            url: '../public/index.php?',
+                            url: 'accueil',
                             type: 'GET',
                             data: data,
 

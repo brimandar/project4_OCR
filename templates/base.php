@@ -8,15 +8,15 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <title><?= $title ?></title>
     <!-- CSS -->
-    <link href="../public/css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="../public/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap.css" rel="stylesheet">
     <!-- Fonts Google -->
     <link href="https://fonts.googleapis.com/css?family=Bitter|Raleway&display=swap" rel="stylesheet"> 
     <!-- DataTable plugin JQuery -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-flash-1.6.1/r-2.2.3/datatables.min.css"/>
     <!-- Favicons -->
-    <link rel="icon" href="../public/img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
     <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
     <meta name="theme-color" content="#563d7c">
     <!-- JQuery-confirm -->
@@ -32,23 +32,23 @@
             <div class="col-3 pt-1">
                 <?php if ($this->_session->get('username')) : ?>
                     <?php if ($this->_session->get('role') === 'admin') : ?>
-                        <a href="../public/index.php?route=administration">Administration</a>
+                        <a href="administration">Administration</a>
                     <?php else : ?>
-                        <a class="btn btn-info" href="../public/index.php?route=profile">Compte de : <?= $this->_session->get('username');?></a>
+                        <a class="btn btn-info" href="compte">Compte de : <?= $this->_session->get('username');?></a>
                     <?php endif; ?>
                 <?php else : ?>
-                    <a class="text-muted" href="../public/index.php?route=register">S'inscrire</a>
+                    <a class="text-muted" href="inscription">S'inscrire</a>
                 <?php endif; ?>
             </div>
 
             <div class="col-6 text-center">
-                <a class="blog-header-logo text-dark" href="index.php">Billet simple pour l'Alaska</a>
+                <a class="blog-header-logo text-dark" href="accueil">Billet simple pour l'Alaska</a>
             </div>
             <div class="col-3 d-flex justify-content-end align-items-center">
                 <?php if ($this->_session->get('username')) : ?>
-                    <a class="btn btn-sm btn-outline-danger" href="../public/index.php?route=logout">Déconnexion</a>
+                    <a class="btn btn-sm btn-outline-danger" href="index.php?route=logout">Déconnexion</a>
                 <?php else : ?>
-                    <a class="btn btn-sm btn-outline-secondary" href="../public/index.php?route=login">Se connecter</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="connexion">Se connecter</a>
                 <?php endif; ?>
             </div>
         </div>
@@ -56,10 +56,10 @@
 
     <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
-        <a class="p-2 text-muted" href="index.php">Accueil</a>
-        <a class="p-2 text-muted" href="../public/index.php?route=allChapters">Le roman</a>
-        <a class="p-2 text-muted" href="../public/index.php?route=biography">Biographie</a>
-        <a class="p-2 text-muted" href="../public/index.php?route=contact">Me contacter</a>
+        <a class="p-2 text-muted" href="accueil">Accueil</a>
+        <a class="p-2 text-muted" href="chapitres">Le roman</a>
+        <a class="p-2 text-muted" href="biographie">Biographie</a>
+        <a class="p-2 text-muted" href="contact">Me contacter</a>
         </nav>
     </div>
 
@@ -84,10 +84,11 @@
 <!-- Bootstrap -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <!-- Files JS -->
-<script src="../public/js/admin.js"></script>
-<script src="../public/js/register.js"></script>
-<script src="../public/js/single.js"></script>
-<script src="../public/js/allChapters.js"></script>
+<script src="/js/admin.js"></script>
+<script src="/js/register.js"></script>
+<script src="/js/single.js"></script>
+<script src="/js/allChapters.js"></script>
+<!-- JQuery Confirm plug in -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <!-- DataBase plugin JQuery -->
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-flash-1.6.1/r-2.2.3/datatables.min.js"></script>

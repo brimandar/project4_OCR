@@ -16,6 +16,6 @@ const DB_USER = 'root';
 const DB_PASS = '';
 
 // UPLOAD IMAGE
-const DIR_UPLOAD = '../public/uploads/';
+const DIR_UPLOAD = 'uploads/';
 
 const IMG_SIZE_MAX = 500000;

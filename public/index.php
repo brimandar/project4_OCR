@@ -5,6 +5,9 @@ require '../vendor/autoload.php';
 
 session_start();
 
+  $router = new \App\config\Router();
+  $router->run();
 
-$router = new \App\config\Router();
-$router->run();
+
+
+?>

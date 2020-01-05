@@ -4,7 +4,7 @@
 <p>Une remarque ? Une suggestion ? N'hésitez-pas à m'écrire.</p>
 <hr class="writerLine">
 <div class="container">
-    <form method="post" action="../public/index.php?route=contact">
+    <form method="post" action="/index.php?route=contact">
 
         <div class="form-row">
             <div class="form-group col-md-6">

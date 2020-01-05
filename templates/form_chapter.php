@@ -25,7 +25,7 @@
      };
 
     ?>
-    <form method="post" action="../public/index.php?route=<?= $route; ?>" enctype="multipart/form-data">
+    <form method="post" action="/index.php?route=<?= $route; ?>" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title">Titre</label>
             <input class="form-control" type="text" id="title" name="title" value="<?= $title; ?>">
@@ -50,7 +50,7 @@
                     <?php if ($purifier->purify($chapter->getImage())) {
                     $pathImage = '"' . $chapter->getImage() . '"' ;
                     } else {
-                    $pathImage = "../public/img/last_chapter.jpg";
+                    $pathImage = "/img/last_chapter.jpg";
                     } ?>
                     <img src=<?= $pathImage ?> class="bd-placeholder-img" width="200" height="200"
                         preserveAspectRatio="xMidYMid slice" focusable="false">

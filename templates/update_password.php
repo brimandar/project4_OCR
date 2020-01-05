@@ -7,7 +7,7 @@
     <p>Le mot de passe de <?= $this->_session->get('username'); ?> sera modifié</p>
 
     <div class="row col-md-6">
-        <form id="formUpdatePwd" method="post" action="../public/index.php?route=updatePassword">
+        <form id="formUpdatePwd" method="post" action="/index.php?route=updatePassword">
             <div class="form-group">
                 <label for="password">Mot de passe</label><br>
                 <input class="form-control" type="password" id="password" name="password"><br>

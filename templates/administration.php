@@ -1,5 +1,5 @@
 <head>
-    <link href="../public/css/admin.css" rel="stylesheet">
+    <link href="../css/admin.css" rel="stylesheet">
 </head>
 <?php $title; ?>
 
@@ -22,7 +22,7 @@
         <!-- Chapters admin -->
         <div id="chapter_admin" class="col-12">
             <h2>Le roman</h2>
-            <a class="btn btn-primary btn-lg mb-2" href="../public/index.php?route=addChapter">Nouveau chapitre</a>
+            <a class="btn btn-primary btn-lg mb-2" href="index.php?route=addChapter">Nouveau chapitre</a>
             <table id="table_chapters_admin" class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
@@ -39,14 +39,14 @@
                     { ?>
                     <tr>
                         <td><a
-                                href="../public/index.php?route=chapitre&chapterId=<?= htmlspecialchars($chapter->getId());?>"><?= htmlspecialchars($chapter->getTitle());?></a>
+                                href="index.php?route=chapitre&chapterId=<?= htmlspecialchars($chapter->getId());?>"><?= htmlspecialchars($chapter->getTitle());?></a>
                         </td>
                         <td><?= $purifier->purify(substr($chapter->getContent(), 0, 150));?></td><!-- Limit 150 caracters -->
                         <td><?= htmlspecialchars($chapter->getUsername());?></td>
                         <td><?= htmlspecialchars($chapter->getCreated_at());?></td>
                         <td>
                             <a
-                                href="../public/index.php?route=editChapter&chapterId=<?= $chapter->getId(); ?>">Modifier</a>
+                                href="index.php?route=editChapter&chapterId=<?= $chapter->getId(); ?>">Modifier</a>
                             <a id="commandSupprChapter_<?= $chapter->getId();?>" class="commandSupprChapter_"
                                 href="#commandSupprChapter_">Supprimer</a>
                         </td>
@@ -57,10 +57,10 @@
             </table>
         </div>
         <!-- Comments admin -->
-        <div id="comment_admin">
+        <div id="comment_admin" class="col-12">
             <h2>Commentaires signalés</h2>
             <?php if($comments) : ?>
-            <table class="table table-bordered">
+            <table id="table-comments-profil" class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
                         <td scope="col">Pseudo</td>
@@ -69,20 +69,22 @@
                         <td scope="col">Actions</td>
                     </tr>
                 </thead>
-                <?php foreach ($comments as $comment)
-                { ?>
-                <tr>
-                    <td><?= htmlspecialchars($comment->getUsername());?></td>
-                    <td><?= substr(htmlspecialchars($comment->getContent()), 0, 150);?></td>
-                    <td>Créé le : <?= htmlspecialchars($comment->getCreated_at());?></td>
-                    <td>
-                        <a href="../public/index.php?route=unflagComment&commentId=<?= $comment->getId(); ?>">Désignaler
-                            le commentaire</a>
-                        <a id="commandSupprCommentAdmin_<?= $comment->getId();?>" class="commandSupprCommentAdmin_"
-                            href="#commandSupprCommentAdmin_">Supprimer le commentaire</a>
-                    </td>
-                </tr>
-                <?php } ?>
+                <tbody>
+                    <?php foreach ($comments as $comment)
+                    { ?>
+                    <tr>
+                        <td><?= htmlspecialchars($comment->getUsername());?></td>
+                        <td><?= substr(htmlspecialchars($comment->getContent()), 0, 150);?></td>
+                        <td>Créé le : <?= htmlspecialchars($comment->getCreated_at());?></td>
+                        <td>
+                            <a href="index.php?route=unflagComment&commentId=<?= $comment->getId(); ?>">Désignaler
+                                le commentaire</a>
+                            <a id="commandSupprCommentAdmin_<?= $comment->getId();?>" class="commandSupprCommentAdmin_"
+                                href="#commandSupprCommentAdmin_">Supprimer le commentaire</a>
+                        </td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
             </table>
             <?php else : ?>
             <p>Aucun commentaire n'a été signalé.</p>
@@ -91,7 +93,7 @@
         <!-- Newsletter -->
         <div id="news_admin" class="col-12">
             <h2>Newsletters (visibles sur la page d'accueil)</h2>
-            <a class="btn btn-primary btn-lg mb-2" href="../public/index.php?route=addNews">Publier une news</a>
+            <a class="btn btn-primary btn-lg mb-2" href="index.php?route=addNews">Publier une news</a>
             <?php if($news) : ?>
             <table id="table_newsletters_admin" class="table table-bordered table-striped">
                 <thead class="thead-dark">
@@ -111,7 +113,7 @@
                         <td><?= $purifier->purify(substr($new->getContent(), 0, 150));?></td><!-- Limit 150 caracters -->
                         <td><?= htmlspecialchars($new->getCreated_at());?></td>
                         <td>
-                            <a href="../public/index.php?route=editNews&newsId=<?= $new->getId(); ?>">Modifier</a>
+                            <a href="index.php?route=editNews&newsId=<?= $new->getId(); ?>">Modifier</a>
                             <a id="btnDeleteNews_<?= $new->getId(); ?>" class="btnDeleteNews_" href="#">Supprimer</a>
                         </td>
                     </tr>

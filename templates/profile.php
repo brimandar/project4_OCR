@@ -8,8 +8,8 @@
     </div>
     <div>
         <ul>
-            <li class="mb-4"><a href="../public/index.php?route=updatePassword">Modifier son mot de passe</a></li>
-            <li><a href="../public/index.php?route=deleteAccount">Supprimer mon compte</a></li>
+            <li class="mb-4"><a href="modifierMDP">Modifier son mot de passe</a></li>
+            <li><a href="/index.php?route=deleteAccount">Supprimer mon compte</a></li>
         </ul>
     </div>
 
@@ -31,7 +31,7 @@
                         ?>
                         <tr>
                             <td><?= htmlspecialchars(date("d-m-Y", strtotime($comment->getCreated_at())));?></td>
-                            <td><a href="../public/index.php?route=chapitre&chapterId=<?= $comment->getChapter_id();?>"><?= htmlspecialchars($comment->getTitleChapter());?></a></td>
+                            <td><a href="chapitre-<?= $comment->getChapter_id();?>"><?= htmlspecialchars($comment->getTitleChapter());?></a></td>
                             <td><?= htmlspecialchars($comment->getContent());?></td>
                             <td>
                                 <a id="commandSupprCommentAdmin_<?= $comment->getId();?>" class="commandSupprCommentAdmin_" href="#commandSupprCommentAdmin_">Supprimer</a>

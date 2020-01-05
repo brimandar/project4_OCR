@@ -5,20 +5,16 @@
 
 <?= $this->_session->show('error_login'); ?>
 
-<div>
-
-    <form method="post" action="../public/index.php?route=login">
+<form method="post" action="index.php?route=login">
+    <div class="form-group col-md-6">
 
         <label for="username">Pseudo</label><br>
-        <input type="text" id="username" name="username" value="<?= isset($post) ? htmlspecialchars($post->get('username')): ''; ?>"><br>
+        <input class="form-control" type="text" id="username" name="username" value="<?= isset($post) ? htmlspecialchars($post->get('username')): ''; ?>"><br>
 
         <label for="password">Mot de passe</label><br>
-        <input type="password" id="password" name="password"><br>
+        <input class="form-control" type="password" id="password" name="password"><br>
 
-        <input type="submit" value="Connexion" id="submit" name="submit">
+        <input class="btn btn-primary" type="submit" value="Connexion" id="submit" name="submit">
 
-    </form>
-
-    <a href="../public/index.php">Retour à l'accueil</a>
-
-</div>
+    </div>
+</form>

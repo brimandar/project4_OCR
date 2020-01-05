@@ -20,7 +20,7 @@
                     foreach ($chapters as $chapter)
                     { ?>
                         <tr>
-                            <td><a href="../public/index.php?route=chapitre&chapterId=<?= htmlspecialchars($chapter->getId());?>"><?= htmlspecialchars($chapter->getTitle());?></a></td>
+                            <td><a href="chapitre-<?= htmlspecialchars($chapter->getId());?>"><?= htmlspecialchars($chapter->getTitle());?></a></td>
                             <td><?= $purifier->purify(substr($chapter->getContent(), 0, 1000));?></td>
                             <td><?= htmlspecialchars($chapter->getCreated_at());?></td>
                         </tr>

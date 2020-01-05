@@ -16,7 +16,7 @@ class BackController extends Controller
     {
         if(!$this->_session->get('username')) {
             $this->_session->set('need_login', 'Vous devez vous connecter pour accéder à cette page');
-            header('Location: ../public/index.php?route=login');
+            header('Location: index.php?route=login');
         } else {
             return true;
         }
@@ -34,7 +34,7 @@ class BackController extends Controller
         $this->checkLoggedIn();
         if(!($this->_session->get('role') === 'admin')) {
             $this->_session->set('not_admin', 'Vous n\'avez pas le droit d\'accéder à cette page');
-            header('Location: ../public/index.php?route=profile');
+            header('Location: index.php?route=profile');
         } else {
             return true;
         }
@@ -85,7 +85,7 @@ class BackController extends Controller
                     }
                     $this->_chapterDAO->addChapter($post, $this->_session->get('id'), $this->_upload->getPathImage());
                     $this->_session->set('add_chapter', 'Le nouveau chapitre a bien été ajouté');
-                    header('Location: ../public/index.php?route=administration');
+                    header('Location: index.php?route=administration');
                 }
 
                 return $this->_view->render('add_chapter', [
@@ -124,7 +124,7 @@ class BackController extends Controller
                         unlink($post->get('imageURL'));//Delete old image
                     }
                 $this->_chapterDAO->editChapter($post, $chapterId, $userId, $this->_upload->getPathImage());
-                header('Location: ../public/index.php?route=administration');
+                header('Location: index.php?route=administration');
                 }
 
                 return $this->_view->render('edit_chapter', [
@@ -155,7 +155,7 @@ class BackController extends Controller
             $chapter = $this->_chapterDAO->getChapter($chapterId);
             unlink($chapter->getImage());//Delete image
             $this->_chapterDAO->deleteArticle($chapterId);
-            header('Location: ../public/index.php?route=administration');
+            header('Location: index.php?route=administration');
         }
     }
 
@@ -171,7 +171,7 @@ class BackController extends Controller
         if($this->checkLoggedIn()) 
         {
             $this->_commentDAO->deleteComment($commentId);
-            header('Location: ../public/index.php');
+            header('Location: index.php');
         }
     }
 
@@ -188,7 +188,7 @@ class BackController extends Controller
         {
             $this->_commentDAO->unflagComment($commentId);
             $this->_session->set('unflag_comment', 'Le commentaire a bien été désignalé');
-            header('Location: ../public/index.php?route=administration');
+            header('Location: index.php?route=administration');
         }
     }
 
@@ -243,7 +243,7 @@ class BackController extends Controller
                             "<p>
                             Vous avez demandé la modification de votre mot de passe. Pour confirmer et réactiver votre inscription, merci de cliquer sur le lien suivant.
                             </p>
-                            <p><a href='http://localhost/PROJET4/public/index.php?route=confirmation&code=" .$activationcode. "'>Cliquez pour réactiver votre compte</a>
+                            <p><a href='index.php?route=confirmation&code=" .$activationcode. "'>Cliquez pour réactiver votre compte</a>
                             </p>
                             <br>
                             <p> 
@@ -258,7 +258,7 @@ class BackController extends Controller
                     $this->_session->start();
                     $this->_session->set('update_password', 'Veuillez confirmer à nouveau votre identité en cliquant sur le lien dans le message qui vient d\'être envoyé');
                     // Return home page
-                    header('Location: ../public/index.php');
+                    header('Location: index.php');
                 }
                 return $this->_view->render('update_password', [
                     'post' => $post,
@@ -312,7 +312,7 @@ class BackController extends Controller
         } else {
             $this->_session->set($param, 'Votre compte a bien été supprimé');
         }
-        header('Location: ../public/index.php');
+        header('Location: index.php');
     }
 
     /**
@@ -327,7 +327,7 @@ class BackController extends Controller
         if($this->checkAdmin()) 
         {
             $this->_userDAO->deleteUser($userId);
-            header('Location: ../public/index.php?route=administration');
+            header('Location: index.php?route=administration');
         }
     }
 
@@ -349,7 +349,7 @@ class BackController extends Controller
                 if(!$errors) 
                 {
                     $this->_newsletterDAO->addNew($post, $this->_session->get('id'));
-                    header('Location: ../public/index.php?route=administration');
+                    header('Location: index.php?route=administration');
                 }
 
                 return $this->_view->render('add_news', [
@@ -380,7 +380,7 @@ class BackController extends Controller
                 if(!$errors) 
                 {
                 $this->_newsletterDAO->editNew($post, $newsId);
-                header('Location: ../public/index.php?route=administration');
+                header('Location: index.php?route=administration');
                 }
                 return $this->_view->render('edit_news', [
                     'post' => $post,
@@ -405,7 +405,7 @@ class BackController extends Controller
         if($this->checkAdmin()) 
         {
             $this->_newsletterDAO->deleteNew($newsId);
-            header('Location: ../public/index.php?route=administration');
+            header('Location: index.php?route=administration');
         }
     }
 

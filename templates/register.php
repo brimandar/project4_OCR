@@ -6,7 +6,7 @@
         <p>En vous inscrivant, vous pourrez commenter les chapitres.</p>
     </div>
     <div class="row col-md-6">
-        <form id="formRegister" method="post" action="../public/index.php?route=register">
+        <form id="formRegister" method="post" action="/index.php?route=register">
             <div class="form-group">
                 <label for="username">Pseudo</label><br>
                 <input class="form-control" type="text" id="username" name="username" value="<?= isset($post) ? htmlspecialchars($post->get('username')): ''; ?>"><br>

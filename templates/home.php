@@ -1,7 +1,7 @@
 <head>
-    <link href="../public/css/home.css" rel="stylesheet">
+    <link href="/css/home.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="../public/js/home.js"></script>
+    <script src="/js/home.js"></script>
 </head>
 
 <!-- security TinyMCE HTML Purifier -->
@@ -49,11 +49,11 @@
             <p class="lead my-3">Ecrivain dans l'air du temps, je vous présente mon nouveau roman sur ce blog. Je
                 publierai chaque nouveau chapitre à interval régulier. Si vous vous inscrivez, vous pourrez me laisser
                 vos commentaires.</p>
-            <p class="lead mb-0"><a href="../public/index.php?route=allChapters"
+            <p class="lead mb-0"><a href="../index.php?route=allChapters"
                     class="text-white font-weight-bold">Accès au livre...</a></p>
         </div>
         <div class="col-sm-2 col-md-6 px-0 media">
-            <img class="rounded img-fluid" src="../public/img/alaska.jpg" alt="" srcset="">
+            <img class="rounded img-fluid" src="/img/alaska.jpg" alt="" srcset="">
         </div>
     </div>
 
@@ -68,14 +68,14 @@
                 <h3 class="mb-0"><?= htmlspecialchars($chapter->getTitle());?></h3>
                 <div class="mb-1 text-muted"><?= $chapter->getCreated_at();?></div>
                 <p class="card-text mb-auto"><?= $purifier->purify(substr($chapter->getContent(),0,200));?>...</p>
-                <a href="index.php?route=chapitre&chapterId=<?= htmlspecialchars($chapter->getId()); ?>"
+                <a href="chapitre-<?= htmlspecialchars($chapter->getId()); ?>"
                     class="stretched-link">Continuer à lire</a>
             </div>
             <div class="col-auto d-none d-lg-block">
                 <?php if ($purifier->purify($chapter->getImage())) {
                 $pathImage = '"' . $chapter->getImage() . '"' ;
             } else {
-                $pathImage = "../public/img/last_chapter.jpg";
+                $pathImage = "/img/last_chapter.jpg";
             } ?>
                 <img src=<?= $pathImage ?> class="bd-placeholder-img" width="200" height="250"
                     preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -116,7 +116,7 @@
                         <?php if ($monthsNews != '') : ?>
                         <?php foreach($monthsNews as $monthsNew) : ?>
                         <li><a
-                                href="../public/index.php?route=archives&year=<?= substr($monthsNew, -4); ?>&month=<?= date('m', strtotime($monthsNew)); ?>"><?= $monthsNew ?></a>
+                                href="newsletters-<?= substr($monthsNew, -4); ?>-<?= date('m', strtotime($monthsNew)); ?>"><?= $monthsNew ?></a>
                         </li>
                         <?php endforeach; ?>
                         <?php endif; ?>

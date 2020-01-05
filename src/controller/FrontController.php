@@ -97,7 +97,7 @@ class FrontController extends Controller
             if(!$errors) {
                 $this->_commentDAO->addComment($post, $chapterId, $user_id);
                 $this->_session->set('add_comment', 'Le nouveau commentaire a bien été ajouté');
-                header('Location: ../public/index.php');
+                header('Location: /index.php');
             }
 
             $chapter = $this->_chapterDAO->getChapter($chapterId);
@@ -121,7 +121,7 @@ class FrontController extends Controller
     {
         $this->_commentDAO->flagComment($commentId);
         $this->_session->set('flag_comment', 'Le commentaire a bien été signalé');
-        header('Location: ../public/index.php');
+        header('Location: /index.php');
     }
 
     /**
@@ -143,7 +143,7 @@ class FrontController extends Controller
                 $this->_session->set('id', $result['result']['id']);
                 $this->_session->set('role', $result['result']['role']);
                 $this->_session->set('username', $post->get('username'));
-                header('Location: ../public/index.php');
+                header('Location: /index.php');
             // Either at least one of this information is incorrect, and we return to the login page with the associated message.
             } else {
                 $this->_session->set('error_login', 'Le pseudo ou le mot de passe sont incorrects');

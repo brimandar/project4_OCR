@@ -1,5 +1,7 @@
 //Infinite Scroll
 // initialize a var ajaxready to true at the first loading of the function
+
+
 $(window).data('ajaxready', true);
 
 $(window).scroll(function () {
@@ -12,18 +14,15 @@ $(window).scroll(function () {
 
     // End of the document reached?
     if ($(document).height() - $(this).height() == $(this).scrollTop()) {
-
         // when the script start, set ajaxreayd to false. So, navigator can't run another task
         $(window).data('ajaxready', false);
-
         $("#loader").show();
         // If end page, add comments with AJAX
         $.ajax({
-            url: "../public/index.php?route=commentaires&chapterId=" + chapterId + "&lastId=" + lastId,
+            url: "index.php?route=commentaires&chapterId=" + chapterId + "&lastId=" + lastId,
             success: function (html) 
             {
                 if(html){
-                    console.log(lastId);
                     $(".post").last().append(html);
                     $("#loader").hide();
                     // set ajaxready to false to continue
@@ -36,11 +35,12 @@ $(window).scroll(function () {
             },
             error: function (req, status, error) 
             {
-                alert("Erreur de chargement des commentaires");
+                alert("Erreur de chargement des commentaires.");
             }
         });
     }
 })
+
 
 // Add a comment
 $("#formAddCommentUser").submit(function(e) 
@@ -50,20 +50,41 @@ $("#formAddCommentUser").submit(function(e)
     let user = $('.userIdentification').html();
     let message =  $('.content').val() ;
     $.ajax({
-        url: "../public/index.php?route=addComment&chapterId=" + chapterId,
+        url: "index.php?route=addComment&chapterId=" + chapterId,
         type: 'POST',
         data : "content=" + message, // et on envoie nos données
         success: function (data) 
         {
             $( "<h4>" + user + "</h4>" + "<p>" + message + "</p>" + "<p>Posté à l'instant</p>" ).insertBefore( ".post" );
             
-        },
-        error: function (req, status, error) 
-        {
-            alert("Erreur de chargement des commentaires");
         }
     });
 })
+
+// Report a comment
+    $(".commentsList").on('click', '.btnReportComment', function(e) //On se place au niveau de la div contenant le lien. Permet d'appliquer Jquery sur les nouveaux elt créés en AJAX
+    {
+        e.preventDefault();
+        let idComment = $(this).attr('id');
+        console.log($('.btnReportComment' + idComment).text());
+        $.ajax({
+            url: "index.php?route=flagComment&commentId=" + idComment,
+            type: 'POST',
+            dataType: "html",
+            success: function () 
+            {
+                    $.alert({
+                        title: "Signalement",
+                        content: "Le commentaire a été signalé à l\'administrateur !",
+                    });
+                    $('.btnReportComment' + idComment).replaceWith("<p>Le commentaire a été signalé</p>")
+            },
+            error: function (req, status, error) 
+            {
+                alert("Commentaire non signalé");
+            }
+    });
+});
 
 //Scroll Indicator : capture scroll any percentage
 $(window).scroll(function(){
@@ -73,4 +94,28 @@ $(window).scroll(function(){
                  var scrolled = (wintop/(docheight-winheight))*100;
       
               $('.scroll-line').css('width', (scrolled + '%'));
+});
+
+
+// Arrow back to top
+if ($('#back-to-top').length) {
+    var scrollTrigger = 100, // px
+        backToTop = function () {
+            var scrollTop = $(window).scrollTop();
+            if (scrollTop > scrollTrigger) {
+                $('#back-to-top').addClass('show');
+            } else {
+                $('#back-to-top').removeClass('show');
+            }
+        };
+    backToTop();
+    $(window).on('scroll', function () {
+        backToTop();
     });
+    $('#back-to-top').on('click', function (e) {
+        e.preventDefault();
+        $('html,body').animate({
+            scrollTop: 0
+        }, 700);
+    });
+}

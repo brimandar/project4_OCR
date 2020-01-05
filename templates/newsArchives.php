@@ -20,7 +20,7 @@
                     foreach ($news as $new)
                     { ?>
                         <tr>
-                            <td><a href="../public/index.php?route=chapitre&chapterId=<?= htmlspecialchars($new->getId());?>"><?= htmlspecialchars($new->getTitle());?></a></td>
+                            <td><?= htmlspecialchars($new->getTitle());?></a></td>
                             <td><?= $purifier->purify($new->getContent());?></td>
                             <td><?= htmlspecialchars($new->getCreated_at());?></td>
                         </tr>

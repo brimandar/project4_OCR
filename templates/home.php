@@ -1,16 +1,8 @@
-<head>
-    <link href="/css/home.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="/js/home.js"></script>
-</head>
-
 <!-- security TinyMCE HTML Purifier -->
 <?php
     $config = HTMLPurifier_Config::createDefault();
     $purifier = new HTMLPurifier($config);
 ?>
-
-<?php $title;?>
 
 <!-- confirmation message -->
 <div class="alert alert-success messageConfirmation">
@@ -29,7 +21,7 @@
     </script>
     <?php endif ?>
     <?= $this->_session->show('register'); ?>
-    <?= $this->_session->get('sendEmail'); ?>
+    <?= $this->_session->show('sendEmail'); ?>
     <?= $this->_session->show('update_password'); ?>
     <?= $this->_session->show('login'); ?>
     <?= $this->_session->show('logout'); ?>
@@ -49,7 +41,7 @@
                     class="text-white font-weight-bold">Accès au livre...</a></p>
         </div>
         <div class="col-sm-2 col-md-6 px-0 media">
-            <img class="rounded img-fluid" src="/img/alaska.jpg" alt="" srcset="">
+            <img class="rounded img-fluid" src="/img/alaska.jpg" alt="Photo d'une aurore boréale">
         </div>
     </div>
 
@@ -73,8 +65,7 @@
             } else {
                 $pathImage = "/img/last_chapter.jpg";
             } ?>
-                <img src=<?= $pathImage ?> class="bd-placeholder-img" width="200" height="250"
-                    preserveAspectRatio="xMidYMid slice" focusable="false">
+                <img src=<?= $pathImage ?> class="bd-placeholder-img" width="200" height="250">
             </div>
         </div>
     </div>

@@ -1,5 +1,3 @@
-<?php $title; ?>
-
 <div class="container">
     <div>
         <h1>Inscription</h1>

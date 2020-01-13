@@ -1,11 +1,4 @@
-<head>
-    <link href="/css/single.css" rel="stylesheet">
-</head>
-
 <div class="progression"><div class="scroll-line"></div></div>
-
-
-
 
 <!-- security TinyMCE HTML Purifier -->
 <?php

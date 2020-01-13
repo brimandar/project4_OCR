@@ -1,5 +1,3 @@
-<?php $this->title = 'Modifier mot mot de passe'; ?>
-
 <h1>Modifier mon mot de passe</h1>
 
 <div>

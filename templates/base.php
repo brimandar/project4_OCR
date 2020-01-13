@@ -8,11 +8,15 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <title><?= $title ?></title>
     <!-- CSS -->
-    <link href="/css/style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/home.css" rel="stylesheet">
+    <link href="css/admin.css" rel="stylesheet">
+    <link href="css/single.css" rel="stylesheet">
     <!-- Fonts Google -->
-    <link href="https://fonts.googleapis.com/css?family=Bitter|Raleway&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Bitter&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet"> 
     <!-- DataTable plugin JQuery -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-flash-1.6.1/r-2.2.3/datatables.min.css"/>
     <!-- Favicons -->
@@ -84,6 +88,7 @@
 <!-- Bootstrap -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <!-- Files JS -->
+<script src="/js/home.js"></script>
 <script src="/js/admin.js"></script>
 <script src="/js/register.js"></script>
 <script src="/js/single.js"></script>
@@ -97,7 +102,7 @@
         <script>
             tinymce.init({
                     selector: 'textarea#contentText',
-                    language_url : '../config/languages/fr_FR.js',
+                    language_url : 'languages/fr_FR.js',
                     language: 'fr_FR',
                     entity_encoding: "numeric",//This will send the emoticon to DB as HTML Dec code
                     menubar: "insert",

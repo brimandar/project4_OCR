@@ -1,5 +1,3 @@
-<?php $title; ?>
-
 <h1>Mon blog</h1>
 
 <div>

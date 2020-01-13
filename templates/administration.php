@@ -1,8 +1,3 @@
-<head>
-    <link href="../css/admin.css" rel="stylesheet">
-</head>
-<?php $title; ?>
-
 <!-- security TinyMCE HTML Purifier -->
 <?php
     $config = HTMLPurifier_Config::createDefault();

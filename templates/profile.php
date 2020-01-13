@@ -1,5 +1,3 @@
-<?php $title; ?>
-
 <div>
 
     <div class=>

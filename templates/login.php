@@ -1,7 +1,3 @@
-<?php 
-$this->title = "Connexion"; 
-?>
-
 <h1>Se connecter</h1>
 
 <?= $this->_session->show('error_login'); ?>

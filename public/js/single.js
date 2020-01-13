@@ -49,6 +49,10 @@ $("#formAddCommentUser").submit(function(e)
     let chapterId = $(".singlechapterId").html();
     let user = $('.userIdentification').html();
     let message =  $('.content').val() ;
+    if($("#formAddCommentUser > #content").val().length<2) {
+        alert("Il faut compléter le champ message !");
+        return;
+    }
     $.ajax({
         url: "index.php?route=addComment&chapterId=" + chapterId,
         type: 'POST',

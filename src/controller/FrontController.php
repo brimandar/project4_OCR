@@ -57,12 +57,19 @@ class FrontController extends Controller
     {
         $chapter = $this->_chapterDAO->getChapter($chapterId);
         $comments = $this->_commentDAO->getCommentsFromChapter($chapterId);
-        return $this->_view->render('single', [
-            'chapter' => $chapter,
-            'comments' => $comments,
-        ], 'Chapitre');
-            // Return variables chapter et comments to the page
-    }
+        if (isset($chapter)) {
+            return $this->_view->render('single', [
+                'chapter' => $chapter,
+                'comments' => $comments,
+            ], 'Chapitre');
+            
+        } else {
+            echo "<script>
+                    alert('Ce chapitre n\'existe pas !');
+                    window.location.href='accueil';
+                 </script>";
+        }
+    }   
 
     /**
      * comments for AJAX query
@@ -92,21 +99,17 @@ class FrontController extends Controller
      */
     public function addComment(Parameter $post, $chapterId, $user_id)
     {
-        $errors = $this->_validation->validate($post, 'Comment');
+        $this->_commentDAO->addComment($post, $chapterId, $user_id);
+        $this->_session->set('add_comment', 'Le nouveau commentaire a bien été ajouté');
+        header('Location: /accueil');
 
-            if(!$errors) {
-                $this->_commentDAO->addComment($post, $chapterId, $user_id);
-                $this->_session->set('add_comment', 'Le nouveau commentaire a bien été ajouté');
-                header('Location: /index.php');
-            }
+        $chapter = $this->_chapterDAO->getChapter($chapterId);
+        $comments = $this->_commentDAO->getCommentsFromChapter($chapterId);
 
-            $chapter = $this->_chapterDAO->getChapter($chapterId);
-            $comments = $this->_commentDAO->getCommentsFromChapter($chapterId);
-
-            return $this->_view->renderSimple('comments', [
-                'chapter' => $chapter,
-                'comments' => $comments,
-            ]);
+        return $this->_view->renderSimple('comments', [
+        'chapter' => $chapter,
+        'comments' => $comments,
+        ]);
     }
 
 

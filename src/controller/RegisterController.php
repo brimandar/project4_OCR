@@ -31,7 +31,7 @@ class RegisterController extends Controller
                 $subject ="Merci pour votre inscription à mon blog - Jean FORTEROCHE";
                 $headers = "MIME-Version: 1.0"."\r\n";
                         $headers .= 'Content-type: text/html; charset=UTF-8'."\r\n";
-                        $headers .= 'From:Jean FORTEROCHE <rudy.steffler@gmail.com>'."\r\n";
+                        $headers .= 'From:Jean FORTEROCHE <' . EMAIL_FORM . '>' . "\r\n";
                         
                 $ms ="
                 <html>
@@ -40,10 +40,10 @@ class RegisterController extends Controller
                         <p>Bonjour " . $post->get('username') . ",
                         </p><br>";
                 $ms.=
-                        "<p>
+                        '<p>
                         Votre compte a bien été créé sur le blog de Jean FORTEROCHE. Pour confirmer et activer votre inscription, merci de cliquer sur le lien suivant.
                         </p>
-                        <p><a href='/index.php?route=confirmation&code=" .$activationcode. "'>Cliquez pour activer votre compte</a>
+                        <p><a href=' . EMAIL_CONFIRM .  '?route=confirmation&code=' . $activationcode . '>Cliquez pour activer votre compte</a>
                         </p>
                         <br>
                         <p> 
@@ -51,7 +51,7 @@ class RegisterController extends Controller
                         </p>
                     </div>
                 </body>
-                </html>";
+                </html>';
                 mail($to,$subject,$ms,$headers);
                 // Return to home page
                 header('Location: /index.php');
@@ -75,10 +75,9 @@ class RegisterController extends Controller
      */
     public function confirmationEmail($code)
     {
+
         $confirmationMsg = $this->_userDAO->confirmationEmail($code);
-        $this->_session->set('confirmation', 'Votre inscription est bien confirmée et validée !');
-        header('Location: /index.php');
-        echo "<script>alert($confirmationMsg)</script>";
+        return $this->_view->render('login',['confirmationMsg' => $confirmationMsg,],"Connection");
     }
 
 }

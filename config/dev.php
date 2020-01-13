@@ -19,3 +19,13 @@ const DB_PASS = '';
 const DIR_UPLOAD = 'uploads/';
 
 const IMG_SIZE_MAX = 500000;
+
+// Email
+const EMAIL_FORM = "test@test.fr";
+
+const EMAIL_CONFIRM = "index.php";
+
+// FORM CONTACT KEY RECAPTCHA
+const KEY_PUBLIC = "6LeDLcgUAAAAALeYgj_EEJIeZ5RRHVPWej4JEywC";
+
+const KEY_SERVER = "6LeDLcgUAAAAAM4OP_McMZpDo8z-WLIHU-bovJOE";

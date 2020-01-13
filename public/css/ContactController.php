@@ -23,11 +23,12 @@ class ContactController extends Controller
             {           
                 // Build POST request recaptcha:
                 $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-                $recaptcha_secret = KEY_SERVER;
+                $recaptcha_secret = '6LeELMgUAAAAAGF-YoO5Qu6jZ3HaNCh2WV4izQrU';
                 $recaptcha_response = $post->get('recaptcha_response');
                 // Make and decode POST request recaptcha:
                 $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
                 $recaptcha = json_decode($recaptcha);
+                var_dump($recaptcha);
                 // Take action based on the score returned:
                 if ($recaptcha->score >= 0.5) 
                 {
@@ -39,9 +40,6 @@ class ContactController extends Controller
                     $mailSubject = $post->get('title');
                     $mailBody = $post->get('content');
                     mail($toEmail, $mailSubject, $mailBody, implode("\r\n", $headers));
-                    $this->_session->set('sendEmail', 'Votre message a bien été envoyé');
-                    // Return home page
-                    header('Location: index.php');
                 }
             } else {
                 return $this->_view->render('contact', [

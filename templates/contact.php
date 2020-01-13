@@ -1,4 +1,4 @@
-<script src="https://www.google.com/recaptcha/api.js?render=6LeDLcgUAAAAALeYgj_EEJIeZ5RRHVPWej4JEywC"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=<?= KEY_PUBLIC ?>"></script>
 
 <h1>Formulaire de contact</h1>
 <p>Une remarque ? Une suggestion ? N'hésitez-pas à m'écrire.</p>
@@ -59,7 +59,7 @@
 <!-- JS for execute ReCaptcha V3 by Google -->
 <script>
     grecaptcha.ready(function() {
-        grecaptcha.execute('6LeDLcgUAAAAALeYgj_EEJIeZ5RRHVPWej4JEywC', {action: 'contact'}).then(function(token) {
+        grecaptcha.execute('<?= KEY_PUBLIC ?>', {action: 'contact'}).then(function(token) {
             var recaptchaResponse = document.getElementById('recaptchaResponse');
             recaptchaResponse.value = token;
         });;

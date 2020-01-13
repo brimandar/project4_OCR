@@ -16,11 +16,9 @@
 <div class="alert alert-success messageConfirmation">
     <?php if (
         $this->_session->get('login') ||
-        $this->_session->get('add_comment') ||
-        $this->_session->get('flag_comment') ||
         $this->_session->get('register') ||
+        $this->_session->get('sendEmail') ||
         $this->_session->get('update_password') ||
-        $this->_session->get('confirmation') ||
         $this->_session->get('logout') ||
         $this->_session->get('delete_account') ||
         $this->_session->get('need_login') ||
@@ -30,10 +28,8 @@
         afficherMessageConfirmation();
     </script>
     <?php endif ?>
-    <?= $this->_session->show('add_comment'); ?>
-    <?= $this->_session->show('flag_comment'); ?>
     <?= $this->_session->show('register'); ?>
-    <?= $this->_session->show('confirmation'); ?>
+    <?= $this->_session->get('sendEmail'); ?>
     <?= $this->_session->show('update_password'); ?>
     <?= $this->_session->show('login'); ?>
     <?= $this->_session->show('logout'); ?>

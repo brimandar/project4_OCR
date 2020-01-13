@@ -231,7 +231,7 @@ class BackController extends Controller
                     $subject ="Modification de votre mot de passe - blog Jean FORTEROCHE";
                     $headers = "MIME-Version: 1.0"."\r\n";
                             $headers .= 'Content-type: text/html; charset=UTF-8'."\r\n";
-                            $headers .= 'From:Jean FORTEROCHE <rudy.steffler@gmail.com>'."\r\n";
+                            $headers .= 'From:Jean FORTEROCHE <' . EMAIL_FORM . '>'."\r\n";
                             
                     $ms ="
                     <html>

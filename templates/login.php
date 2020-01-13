@@ -1,7 +1,8 @@
-<?php $this->title = "Connexion"; ?>
+<?php 
+$this->title = "Connexion"; 
+?>
 
-<h1>Mon blog</h1>
-<p>En construction</p>
+<h1>Se connecter</h1>
 
 <?= $this->_session->show('error_login'); ?>
 
@@ -17,4 +18,13 @@
         <input class="btn btn-primary" type="submit" value="Connexion" id="submit" name="submit">
 
     </div>
+
 </form>
+
+<script src="/js/login.js"></script>
+
+<?php
+if (isset($confirmationMsg)) {
+    echo "<i>Merci de vous être enregistré. Vous pouvez vous connecter.</i>";
+}
+?>

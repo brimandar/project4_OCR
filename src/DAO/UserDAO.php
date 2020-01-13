@@ -136,7 +136,6 @@ class UserDAO extends DAO
         {
             $sql = 'SELECT * FROM users WHERE activationcode= ?';
             $num = $this->createQuery($sql, [$code]);
-            var_dump($num);
             if($num>0)
             {
                 $st=0;
@@ -148,12 +147,15 @@ class UserDAO extends DAO
                 $st=1;
                 $result1 = 'UPDATE users SET status= ? WHERE activationcode= ?';
                 $this->createQuery($result1, [$st, $code]); 
-                return $msg="Your account is successfully activated"; 
+                $mgs = "Votre compte est bien activé";
+                return $mgs; 
                 } else {
-                return $msg ="Your account is already active, no need to activate again";
+                    $mgs = "Votre compte a déjà été activé"; 
+                return $mgs;
             }
             } else {
-                return $msg ="Wrong activation code.";
+                $mgs = "Erreur d'activation";
+                return  $mgs;
             }
         }   
     }

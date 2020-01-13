@@ -123,8 +123,12 @@ class NewsletterDAO extends DAO
             $news[$newId] = new Newsletter($row);
         }
         $result->closeCursor();
-
-        return $news;
+        if(isset($news)) {
+            return $news;
+        } else { 
+            $news = NULL;
+            return $news;
+        };
     }
 }
 

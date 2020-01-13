@@ -48,9 +48,14 @@ class ChapterDAO extends DAO
                 INNER JOIN users ON chapters.user_id = users.id
                 WHERE chapters.id = ?';
         $return = $this->createQuery($sql, [$chapterId]);
+        
         $data = $return->fetch();
-        $chapter = new Chapter($data);
-        $return->closeCursor();
+        if($data !== FALSE) {
+            $chapter = new Chapter($data);
+            $return->closeCursor();
+        } else {
+            return ;
+        }
         return $chapter;
     }
 

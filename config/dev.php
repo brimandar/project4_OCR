@@ -26,6 +26,6 @@ const EMAIL_FORM = "test@test.fr";
 const EMAIL_CONFIRM = "index.php";
 
 // FORM CONTACT KEY RECAPTCHA
-const KEY_PUBLIC = "6LeDLcgUAAAAALeYgj_EEJIeZ5RRHVPWej4JEywC";
+const KEY_PUBLIC = "public_key";
 
-const KEY_SERVER = "6LeDLcgUAAAAAM4OP_McMZpDo8z-WLIHU-bovJOE";
+const KEY_SERVER = "secret_key";

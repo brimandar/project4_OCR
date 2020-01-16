@@ -113,7 +113,7 @@
                 <div class="p-4">
                     <h4 class="font-italic">Réseaux Sociaux</h4>
                     <ol class="list-unstyled">
-                        <li><a href="https://github.com/brimandar/project4_OCR">GitHub</a></li>
+                        <li><a href="https://github.com/brimandar">GitHub</a></li>
                         <li><a href="https://twitter.com/JForteroche">Twitter</a></li>
                         <li><a href="https://www.facebook.com/groups/210033549406928/">Facebook - Nos plus belles lectures</a></li>
                     </ol>
